@@ -129,6 +129,5 @@ dmypy.json
 .pyre/
 
 # Alex Folder.
-vscode/
-.config/
-.resources and notes/
+.vscode/
+config/

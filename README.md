@@ -1,4 +1,4 @@
-# Template Repo
+# Microsoft Graph Python Client Library
 
 ## Table of Contents
 
