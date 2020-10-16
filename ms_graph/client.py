@@ -15,6 +15,7 @@ from typing import Union
 from ms_graph.users import Users
 from ms_graph.drives import Drives
 from ms_graph.groups import Groups
+from ms_graph.notes import Notes
 from ms_graph.session import GraphSession
 
 from urllib.parse import urlencode, urlparse, quote_plus
@@ -367,3 +368,17 @@ class MicrosoftGraphClient():
         groups_object: Groups = Groups(session=self.graph_session)
 
         return groups_object
+
+    def notes(self) -> Notes:
+        """Used to access the OneNotes Services and metadata.
+
+        ### Returns
+        ---
+        Groups:
+            The `Notes` services Object.
+        """
+
+        # Grab the `Notes` Object for the session.
+        notes_object: Notes = Notes(session=self.graph_session)
+
+        return notes_object

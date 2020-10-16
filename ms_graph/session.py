@@ -107,6 +107,8 @@ class GraphSession():
         # Define the headers.
         headers = self.build_headers(mode='json')
 
+        print(url)
+
         # Define a new session.
         request_session = requests.Session()
         request_session.verify = True
