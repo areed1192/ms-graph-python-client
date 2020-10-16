@@ -1,4 +1,5 @@
 import json
+import msal
 import time
 import pprint
 import urllib
@@ -12,6 +13,8 @@ from typing import Dict
 from typing import Union
 
 from ms_graph.users import Users
+from ms_graph.drives import Drives
+from ms_graph.groups import Groups
 from ms_graph.session import GraphSession
 
 from urllib.parse import urlencode, urlparse, quote_plus
@@ -72,11 +75,19 @@ class MicrosoftGraphClient():
         self.access_token = None
         self.refresh_token = None
         self.graph_session = None
+        self.id_token = None
 
         self.base_url = self.RESOURCE + self.api_version + '/'
         self.office_url = self.OFFICE365_AUTHORITY_URL + self.OFFICE365_AUTH_ENDPOINT
         self.graph_url = self.AUTHORITY_URL + self.account_type + self.AUTH_ENDPOINT
         self.office365 = office365
+
+        # Initialize the Credential App.
+        self.client_app = msal.ConfidentialClientApplication(
+            client_id=self.client_id,
+            authority=self.AUTHORITY_URL + self.account_type,
+            client_credential=self.client_secret
+        )
 
     def _state(self, action: str, token_dict: dict = None) -> bool:
         """Sets the session state for the Client Library.
@@ -113,6 +124,7 @@ class MicrosoftGraphClient():
 
                 self.refresh_token = credentials['refresh_token']
                 self.access_token = credentials['access_token']
+                self.id_token = credentials['id_token']
                 self.token_dict = credentials
 
                 return True
@@ -126,6 +138,9 @@ class MicrosoftGraphClient():
             token_dict['expires_in'] = time.time() + int(token_dict['expires_in'])
             token_dict['ext_expires_in'] = time.time() + int(token_dict['ext_expires_in'])
 
+            self.refresh_token = token_dict['refresh_token']
+            self.access_token = token_dict['access_token']
+            self.id_token = token_dict['id_token']
             self.token_dict = token_dict
 
             with open(file=self.credentials, mode='w+') as state_file:
@@ -195,15 +210,11 @@ class MicrosoftGraphClient():
         -------
         (bool)
             `True` if it was successful and `False` if it failed.
-        """        
+        """
 
         # if the current access token is not expired then we are still authenticated.
         if self._token_seconds(token_type='access_token') > 0:
             return True
-
-        # if the refresh token is expired then you have to do a full login.
-        elif self._token_seconds(token_type='refresh_token') <= 0:
-            return False
 
         # if the current access token is expired then try and refresh access token.
         elif self.refresh_token and self.grab_refresh_token():
@@ -213,7 +224,7 @@ class MicrosoftGraphClient():
         return False
 
     def login(self) -> None:
-        """Logs the user into the session."""        
+        """Logs the user into the session."""
 
         # Load the State.
         self._state(action='load')
@@ -223,8 +234,9 @@ class MicrosoftGraphClient():
 
             # Set the Session.
             self.graph_session = GraphSession(client=self)
+
             return True
-            
+
         else:
 
             # Build the URL.
@@ -253,21 +265,14 @@ class MicrosoftGraphClient():
         A string.
         """
 
-        params = {
-            'client_id': self.client_id,
-            'redirect_uri': self.redirect_uri,
-            'scope': ' '.join(self.scope),
-            'response_type': 'code',
-            'response_mode': 'query',
-            'state': self.state
-        }
+        # Build the Auth URL.
+        auth_url = self.client_app.get_authorization_request_url(
+            scopes=self.scope,
+            state=self.state,
+            redirect_uri=self.redirect_uri
+        )
 
-        if self.office365:
-            response = self.office_url + urlencode(params).replace("+","%20")
-        else:
-            response = self.graph_url + urlencode(params).replace("+","%20")
-
-        return response
+        return auth_url
 
     def grab_access_token(self) -> Dict:
         """Exchanges a code for an Access Token.
@@ -283,31 +288,12 @@ class MicrosoftGraphClient():
         # Grab the Code.
         code = query_dict[self.redirect_uri + "?code"]
 
-        # Define the Arguments.
-        data = {
-            'client_id': self.client_id,
-            'redirect_uri': self.redirect_uri,
-            'client_secret': self.client_secret,
-            'code': code,
-            'grant_type': 'authorization_code',
-        }
-
-        # If we are doing a 365 request then change the endpoint.
-        if self.office365:
-
-            response = requests.post(
-                self.OFFICE365_AUTHORITY_URL + self.OFFICE365_TOKEN_ENDPOINT,
-                data=data
-            )
-
-        else:
-
-            response = requests.post(
-                self.AUTHORITY_URL + self.account_type + self.TOKEN_ENDPOINT,
-                data=data
-            )
-
-        token_dict = response.json()
+        # Grab the Token.
+        token_dict = self.client_app.acquire_token_by_authorization_code(
+            code=code,
+            scopes=self.scope,
+            redirect_uri=self.redirect_uri
+        )
 
         # Save the token dict.
         self._state(
@@ -326,30 +312,13 @@ class MicrosoftGraphClient():
             A token dictionary with a new access token.
         """
 
-        data = {
-            'client_id': self.client_id,
-            'redirect_uri': self.redirect_uri,
-            'client_secret': self.client_secret,
-            'refresh_token': self.refresh_token,
-            'grant_type': 'refresh_token',
-        }
+        # Grab a new token using our refresh token.
+        token_dict = self.client_app.acquire_token_by_refresh_token(
+            refresh_token=self.refresh_token,
+            scopes=self.scope
+        )
 
-        if self.office365:
-
-            response = requests.post(
-                self.OFFICE365_AUTHORITY_URL + self.OFFICE365_TOKEN_ENDPOINT,
-                data=data
-            )
-
-        else:
-
-            response = requests.post(
-                self.AUTHORITY_URL + self.account_type + self.TOKEN_ENDPOINT,
-                data=data
-            )
-
-        token_dict = response.json()
-
+        # Save the Token.
         self._state(
             action='save',
             token_dict=token_dict
@@ -358,7 +327,43 @@ class MicrosoftGraphClient():
         return token_dict
 
     def users(self) -> Users:
+        """Used to access the User Services and metadata.
 
-        user_object: Users = Users(session=self.graph_session)
+        ### Returns
+        ---
+        Users:
+            The `Users` services Object.
+        """
 
-        return user_object
+        # Grab the Users Object for the session.
+        users_object: Users = Users(session=self.graph_session)
+
+        return users_object
+
+    def drives(self) -> Drives:
+        """Used to access the Drives Services and metadata.
+
+        ### Returns
+        ---
+        Drives:
+            The `Drives` services Object.
+        """
+
+        # Grab the Drives Object for the session.
+        drives_object: Drives = Drives(session=self.graph_session)
+
+        return drives_object
+
+    def groups(self) -> Groups:
+        """Used to access the Groups Services and metadata.
+
+        ### Returns
+        ---
+        Groups:
+            The `Groups` services Object.
+        """
+
+        # Grab the `Groups` Object for the session.
+        groups_object: Groups = Groups(session=self.graph_session)
+
+        return groups_object

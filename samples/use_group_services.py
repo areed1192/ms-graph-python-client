@@ -1,7 +1,8 @@
 from pprint import pprint
-from ms_graph.client import MicrosoftGraphClient
 from configparser import ConfigParser
+from ms_graph.client import MicrosoftGraphClient
 
+# Define the Scopes needed to Login.
 scopes = [
     'Calendars.ReadWrite',
     'Files.ReadWrite.All',
@@ -11,9 +12,8 @@ scopes = [
     'User.Read.All',
     'Directory.Read.All',
     'Directory.ReadWrite.All',
-    'offline_access',
-    'openid', 
-    'profile'
+    'Group.Read.All',
+    'Group.ReadWrite.All'
 ]
 
 # Initialize the Parser.
@@ -39,17 +39,8 @@ graph_client = MicrosoftGraphClient(
 # Login to the Client.
 graph_client.login()
 
-# Grab the User Services.
-user_services = graph_client.users()
+# Grab the Groups Services.
+groups_services = graph_client.groups()
 
-# List the Users.
-pprint(user_services.list_users())
-
-# Grab the Drive Services.
-drive_services = graph_client.drives()
-
-# List the Root Drive.
-pprint(drive_services.get_root_drive())
-
-# List the Root Drive Deltas.
-pprint(drive_services.get_root_drive_delta())
+# List all Groups.
+pprint(groups_services.list_groups())

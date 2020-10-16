@@ -11,9 +11,9 @@ scopes = [
     'User.Read.All',
     'Directory.Read.All',
     'Directory.ReadWrite.All',
-    'offline_access',
-    'openid', 
-    'profile'
+    # 'offline_access',
+    # 'openid', 
+    # 'profile'
 ]
 
 # Initialize the Parser.
@@ -39,17 +39,29 @@ graph_client = MicrosoftGraphClient(
 # Login to the Client.
 graph_client.login()
 
-# Grab the User Services.
-user_services = graph_client.users()
-
-# List the Users.
-pprint(user_services.list_users())
-
 # Grab the Drive Services.
 drive_services = graph_client.drives()
 
 # List the Root Drive.
 pprint(drive_services.get_root_drive())
 
-# List the Root Drive Deltas.
-pprint(drive_services.get_root_drive_delta())
+# # List the Root Drive Deltas.
+# pprint(drive_services.get_root_drive_delta())
+
+# # List the Root Drive Children.
+# pprint(drive_services.get_root_drive_children())
+
+# # List the Root Drive Followers
+# pprint(drive_services.get_root_drive_followed())
+
+# Grab a Drive by id.
+pprint(drive_services.get_drive_by_id(drive_id='8bc640c57cda25b6'))
+
+# Grab MY Drives.
+pprint(drive_services.get_my_drives())
+
+# Grab User Drives.
+pprint(drive_services.get_user_drives(user_id='8bc640c57cda25b6'))
+
+# Grab Group Drives.
+pprint(drive_services.get_user_drives(user_id='8bc640c57cda25b6'))

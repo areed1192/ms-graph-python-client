@@ -1,5 +1,6 @@
 import requests
 
+from pprint import pprint
 from typing import List
 from typing import Dict
 from typing import Union
@@ -31,24 +32,46 @@ class GraphSession():
         self.client: MicrosoftGraphClient = client
 
     def build_headers(self, mode: str = 'json') -> Dict:
+        """Used to build the headers needed to make the request.
+
+        ### Parameters
+        ----------
+        mode: str, optional
+            The content mode the headers is being built for, by default `json`.
+
+        ### Returns
+        -------
+        Dict:
+            A dictionary containing all the components.
+        """        
 
         # Fake the headers.
         headers = {
             "Authorization": "Bearer {access_token}".format(access_token=self.client.access_token)
         }
 
-        print(headers)
-
         return headers
 
     def build_url(self, endpoint: str) -> str:
+        """Build the URL used the make string.
+
+        ### Parameters
+        ----
+        endpoint : str
+            The endpoint used to make the full URL.
+
+        ### Returns
+        ----
+        str:
+            The full URL with the endpoint needed.
+        """        
         
         url = self.client.RESOURCE + self.client.api_version + "/" + endpoint
 
         return url
 
     def make_request(self, method: str, endpoint: str, mode: str = None, params: dict = None, data: dict = None, json:dict = None, 
-                      order_details: bool = False) -> Dict:
+                     order_details: bool = False) -> Dict:
         """Handles all the requests in the library.
 
         ### Overview:
@@ -108,5 +131,5 @@ class GraphSession():
         if response.ok:
             return response.json()
         else:
-            print(response.json())
+            pprint(response.json())
             raise requests.HTTPError()

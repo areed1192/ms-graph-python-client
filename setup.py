@@ -26,7 +26,8 @@ setup(
 
     # Define dependencies.
     install_requires=[
-        'requests==2.24.0'
+        'requests==2.24.0',
+        'msal==1.5.0'
     ],
 
     # Specify folder content.
