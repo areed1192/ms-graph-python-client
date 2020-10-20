@@ -12,5 +12,5 @@ config.set('graph_api', 'client_secret', '')
 config.set('graph_api', 'redirect_uri', '')
 
 # Write the file.
-with open(file='configs/config_video.ini', mode='w+') as f:
+with open(file='samples/configs/config_video.ini', mode='w+') as f:
     config.write(f)

@@ -9,9 +9,14 @@
 
 ## Overview
 
+Microsoft Graph is the gateway to data and intelligence in Microsoft 365. It provides
+a unified programmability model that you can use to access the tremendous amount of data
+in Microsoft 365, Windows 10, and Enterprise Mobility + Security. This project utilizes python
+to help users interact with and manage data on Microsoft Graph API.
+
 ## Setup
 
-**Setup - Requirements Install:***
+**Setup - Requirements Install:**
 
 For this particular project, you only need to install the dependencies, to use the project. The dependencies
 are listed in the `requirements.txt` file and can be installed by running the following command:
@@ -52,7 +57,7 @@ you can use the library wherever you want.
 To **install** the library, run the following command from the terminal.
 
 ```console
-pip install federal-register
+pip install
 ```
 
 **Setup - PyPi Upgrade:**
@@ -60,15 +65,68 @@ pip install federal-register
 To **upgrade** the library, run the following command from the terminal.
 
 ```console
-pip install --upgrade federal-register
+pip install --upgrade
 ```
 
 ## Usage
 
-Here is a simple example of using the `place_holder` library.
+Here is a simple example of using the `ms_graph` library.
 
 ```python
+from pprint import pprint
+from ms_graph.client import MicrosoftGraphClient
+from configparser import ConfigParser
 
+scopes = [
+    'Calendars.ReadWrite',
+    'Files.ReadWrite.All',
+    'User.ReadWrite.All',
+    'Notes.ReadWrite.All',
+    'Directory.ReadWrite.All',
+    'User.Read.All',
+    'Directory.Read.All',
+    'Directory.ReadWrite.All',
+    'offline_access',
+    'openid',
+    'profile'
+]
+
+# Initialize the Parser.
+config = ConfigParser()
+
+# Read the file.
+config.read('config/config.ini')
+
+# Get the specified credentials.
+client_id = config.get('graph_api', 'client_id')
+client_secret = config.get('graph_api', 'client_secret')
+redirect_uri = config.get('graph_api', 'redirect_uri')
+
+# Initialize the Client.
+graph_client = MicrosoftGraphClient(
+    client_id=client_id,
+    client_secret=client_secret,
+    redirect_uri=redirect_uri,
+    scope=scopes,
+    credentials='config/ms_graph_state.jsonc'
+)
+
+# Login to the Client.
+graph_client.login()
+
+
+# Grab the User Services.
+user_services = graph_client.users()
+
+# List the Users.
+pprint(user_services.list_users())
+
+
+# Grab the Drive Services.
+drive_services = graph_client.drives()
+
+# List the Root Drive.
+pprint(drive_services.get_root_drive())
 ```
 
 ## Support These Projects
