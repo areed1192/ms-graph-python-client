@@ -59,9 +59,17 @@ notes_services = graph_client.notes()
 pprint(notes_services.list_my_notebooks())
 
 # Grab the Notebook Sections.
-notebook_sections = notes_services.list_my_notebook_section(
+notebook_sections = notes_services.list_my_notebook_sections(
     notebook_id="0-8BC640C57CDA25B6!71451"
 )
 
-# List all Notes.
+# List all the sections for the Notebook.
+pprint(notebook_sections)
+
+# Grab all the Notebook Pages.
+notebook_pages = notes_services.list_my_notebook_pages(
+    section_id="0-8BC640C57CDA25B6!71455"
+)
+
+# List all the Page for the Notebook for the particular session.
 pprint(notebook_sections)

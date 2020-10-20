@@ -239,7 +239,7 @@ class Notes():
 
         return content
 
-    def list_my_notebook_section(self, notebook_id: str) -> Dict:
+    def list_my_notebook_sections(self, notebook_id: str) -> Dict:
         """Retrieve a list of onenoteSection objects from one of your notebooks.
 
         ### Parameters
@@ -257,6 +257,35 @@ class Notes():
         endpoint = endpoint = "me/" + self.endpoint + "/notebooks/{notebook_id}".format(
             notebook_id=notebook_id
         ) + "/sections"
+
+        content = self.graph_session.make_request(
+            method='get',
+            endpoint=endpoint
+        )
+
+        return content
+
+    def list_my_notebook_pages(self, section_id: str) -> Dict:
+        """Retrieve a list of onenoteSection objects from one of your notebooks.
+
+        ### Parameters
+        ----
+        notebook_id (str): The Notebook ID that you
+        want to pull.
+
+        section (str): The Section ID that you
+        want to pull.
+
+        ### Returns
+        ----
+        Dict:
+            A List of `Notebook` Resource Object.
+        """
+
+        # Define the endpoint.
+        endpoint = endpoint = "me/{endpoint}/".format(endpoint=self.endpoint) + "/sections/{section_id}".format(
+            section_id=section_id
+        )
 
         content = self.graph_session.make_request(
             method='get',
