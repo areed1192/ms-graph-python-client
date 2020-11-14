@@ -1,7 +1,4 @@
-from typing import List
 from typing import Dict
-from typing import Union
-
 from ms_graph.session import GraphSession
 
 
@@ -10,9 +7,9 @@ class DriveItems():
     """
     ## Overview:
     ----
-    The driveItem resource represents a file, folder, 
-    or other item stored in a drive. All file system 
-    objects in OneDrive and SharePoint are returned as 
+    The driveItem resource represents a file, folder,
+    or other item stored in a drive. All file system
+    objects in OneDrive and SharePoint are returned as
     driveItem resources.
     """
 
@@ -32,8 +29,7 @@ class DriveItems():
         self.endpoint = 'drive'
         self.collections_endpoint = 'drives/'
 
-    
-    def get_drive_item(self, drive_id: str, item_id: str) -> Dict:     
+    def get_drive_item(self, drive_id: str, item_id: str) -> Dict:
         """Grab's a DriveItem Resource using the Item ID and Drive ID.
 
         ### Parameters
@@ -53,7 +49,7 @@ class DriveItems():
 
         content = self.graph_session.make_request(
             method='get',
-            endpoint= self.collections_endpoint + "/{drive_id}/items/{item_id}".format(
+            endpoint=self.collections_endpoint + "/{drive_id}/items/{item_id}".format(
                 drive_id=drive_id,
                 item_id=item_id
             )
@@ -61,7 +57,7 @@ class DriveItems():
 
         return content
 
-    def get_drive_item_by_path(self, drive_id: str, item_path: str) -> Dict:     
+    def get_drive_item_by_path(self, drive_id: str, item_path: str) -> Dict:
         """Grab's a DriveItem Resource using the Item ID and Drive ID.
 
         ### Parameters
@@ -80,7 +76,7 @@ class DriveItems():
 
         content = self.graph_session.make_request(
             method='get',
-            endpoint= self.collections_endpoint + "/{drive_id}/root:/{path}".format(
+            endpoint=self.collections_endpoint + "/{drive_id}/root:/{path}".format(
                 drive_id=drive_id,
                 path=item_path
             )
@@ -88,7 +84,7 @@ class DriveItems():
 
         return content
 
-    def get_group_drive_item(self, group_id: str, item_id: str) -> Dict:     
+    def get_group_drive_item(self, group_id: str, item_id: str) -> Dict:
         """Grab's a DriveItem Resource using the Item ID and Drive ID.
 
         ### Parameters
@@ -108,7 +104,7 @@ class DriveItems():
 
         content = self.graph_session.make_request(
             method='get',
-            endpoint= "/groups/{group_id}/drive/items/{item_id}".format(
+            endpoint="/groups/{group_id}/drive/items/{item_id}".format(
                 group_id=group_id,
                 item_id=item_id
             )
@@ -116,7 +112,7 @@ class DriveItems():
 
         return content
 
-    def get_group_drive_item_by_path(self, group_id: str, item_path: str) -> Dict:     
+    def get_group_drive_item_by_path(self, group_id: str, item_path: str) -> Dict:
         """Grab's a DriveItem Resource using the Item ID and Drive ID.
 
         ### Parameters
@@ -135,7 +131,7 @@ class DriveItems():
 
         content = self.graph_session.make_request(
             method='get',
-            endpoint= "/groups/{group_id}/drive/root:/{item_path}".format(
+            endpoint="/groups/{group_id}/drive/root:/{item_path}".format(
                 group_id=group_id,
                 item_path=item_path
             )
@@ -143,7 +139,7 @@ class DriveItems():
 
         return content
 
-    def get_my_drive_item(self, item_id: str) -> Dict:     
+    def get_my_drive_item(self, item_id: str) -> Dict:
         """Grab's a DriveItem Resource using the Item ID and Drive ID.
 
         ### Parameters
@@ -160,14 +156,14 @@ class DriveItems():
 
         content = self.graph_session.make_request(
             method='get',
-            endpoint= "/me/drive/items/{item_id}".format(
+            endpoint="/me/drive/items/{item_id}".format(
                 item_id=item_id
             )
         )
 
         return content
 
-    def get_my_drive_item_by_path(self, item_path: str) -> Dict:     
+    def get_my_drive_item_by_path(self, item_path: str) -> Dict:
         """Grab's a DriveItem Resource using the Item ID and Drive ID.
 
         ### Parameters
@@ -183,14 +179,14 @@ class DriveItems():
 
         content = self.graph_session.make_request(
             method='get',
-            endpoint= "/me/drive/root:/{item_path}".format(
+            endpoint="/me/drive/root:/{item_path}".format(
                 item_path=item_path
             )
         )
 
         return content
 
-    def get_site_drive_item(self, site_id: str, item_id: str) -> Dict:     
+    def get_site_drive_item(self, site_id: str, item_id: str) -> Dict:
         """Grab's a DriveItem Resource using the Item ID and Drive ID.
 
         ### Parameters
@@ -210,7 +206,7 @@ class DriveItems():
 
         content = self.graph_session.make_request(
             method='get',
-            endpoint= "/sites/{site_id}/drive/items/{item_id}".format(
+            endpoint="/sites/{site_id}/drive/items/{item_id}".format(
                 site_id=site_id,
                 item_id=item_id
             )
@@ -218,7 +214,7 @@ class DriveItems():
 
         return content
 
-    def get_site_drive_item_by_path(self, site_id: str, item_path: str) -> Dict:     
+    def get_site_drive_item_by_path(self, site_id: str, item_path: str) -> Dict:
         """Grab's a DriveItem Resource using the Item ID and Drive ID.
 
         ### Parameters
@@ -237,7 +233,7 @@ class DriveItems():
 
         content = self.graph_session.make_request(
             method='get',
-            endpoint= "/sites/{site_id}/drive/root:/{item_path}".format(
+            endpoint="/sites/{site_id}/drive/root:/{item_path}".format(
                 site_id=site_id,
                 item_path=item_path
             )
@@ -245,7 +241,7 @@ class DriveItems():
 
         return content
 
-    def get_site_drive_item_from_list(self, site_id: str, list_id: str, item_id: str) -> Dict:     
+    def get_site_drive_item_from_list(self, site_id: str, list_id: str, item_id: str) -> Dict:
         """Grab's a DriveItem Resource using the Item ID and Drive ID.
 
         ### Parameters
@@ -268,7 +264,7 @@ class DriveItems():
 
         content = self.graph_session.make_request(
             method='get',
-            endpoint= "/sites/{site_id}/lists/{list_id}/items/{item_id}/driveItem".format(
+            endpoint="/sites/{site_id}/lists/{list_id}/items/{item_id}/driveItem".format(
                 site_id=site_id,
                 list_id=list_id,
                 item_id=item_id
@@ -277,7 +273,7 @@ class DriveItems():
 
         return content
 
-    def get_user_drive_item(self, user_id: str, item_id: str) -> Dict:     
+    def get_user_drive_item(self, user_id: str, item_id: str) -> Dict:
         """Grab's a DriveItem Resource using the Item ID and Drive ID.
 
         ### Parameters
@@ -297,7 +293,7 @@ class DriveItems():
 
         content = self.graph_session.make_request(
             method='get',
-            endpoint= "/users/{user_id}/drive/items/{item_id}".format(
+            endpoint="/users/{user_id}/drive/items/{item_id}".format(
                 user_id=user_id,
                 item_id=item_id
             )
@@ -305,7 +301,7 @@ class DriveItems():
 
         return content
 
-    def get_user_drive_item_by_path(self, user_id: str, item_path: str) -> Dict:     
+    def get_user_drive_item_by_path(self, user_id: str, item_path: str) -> Dict:
         """Grab's a DriveItem Resource using the Item ID and Drive ID.
 
         ### Parameters
@@ -324,7 +320,7 @@ class DriveItems():
 
         content = self.graph_session.make_request(
             method='get',
-            endpoint= "/users/{user_id}/drive/root:/{item_path}".format(
+            endpoint="/users/{user_id}/drive/root:/{item_path}".format(
                 user_id=user_id,
                 item_path=item_path
             )

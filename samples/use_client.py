@@ -12,7 +12,7 @@ scopes = [
     'Directory.Read.All',
     'Directory.ReadWrite.All',
     'offline_access',
-    'openid', 
+    'openid',
     'profile'
 ]
 

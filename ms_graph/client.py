@@ -1,16 +1,13 @@
 import json
 import msal
 import time
-import pprint
 import urllib
-import requests
 import random
 import string
 import pathlib
 
 from typing import List
 from typing import Dict
-from typing import Union
 
 from ms_graph.users import Users
 from ms_graph.drives import Drives
@@ -18,8 +15,6 @@ from ms_graph.groups import Groups
 from ms_graph.notes import Notes
 from ms_graph.session import GraphSession
 from ms_graph.drive_items import DriveItems
-
-from urllib.parse import urlencode, urlparse, quote_plus
 
 
 class MicrosoftGraphClient():
@@ -34,23 +29,28 @@ class MicrosoftGraphClient():
     OFFICE365_AUTH_ENDPOINT = '/oauth20_authorize.srf?'
     OFFICE365_TOKEN_ENDPOINT = '/oauth20_token.srf'
 
-    def __init__(self, client_id: str, client_secret: str, redirect_uri: str, scope: List[str],
-                 account_type: str = 'consumers', office365: bool = False, credentials: str = None):
+    def __init__(self, client_id: str, client_secret: str, redirect_uri: str,
+                 scope: List[str], account_type: str = 'consumers',
+                 office365: bool = False, credentials: str = None):
         """Initializes the Graph Client.
 
         ### Parameters
         ----
         client_id : str
-            The application Client ID assigned when creating a new Microsoft App.
+            The application Client ID assigned when
+            creating a new Microsoft App.
 
         client_secret : str
-            The application Client Secret assigned when creating a new Microsoft App.
+            The application Client Secret assigned when
+            creating a new Microsoft App.
 
         redirect_uri : str
-            The application Redirect URI assigned when creating a new Microsoft App.
+            The application Redirect URI assigned when
+            creating a new Microsoft App.
 
         scope : List[str]
-            The list of scopes you want the application to have access to.
+            The list of scopes you want the application
+            to have access to.
 
         account_type : str, optional
             [description], by default 'common'
@@ -137,8 +137,10 @@ class MicrosoftGraphClient():
         # If we are saving the state then open the file and dump the dictionary.
         elif action == 'save':
 
-            token_dict['expires_in'] = time.time() + int(token_dict['expires_in'])
-            token_dict['ext_expires_in'] = time.time() + int(token_dict['ext_expires_in'])
+            token_dict['expires_in'] = time.time(
+            ) + int(token_dict['expires_in'])
+            token_dict['ext_expires_in'] = time.time(
+            ) + int(token_dict['ext_expires_in'])
 
             self.refresh_token = token_dict['refresh_token']
             self.access_token = token_dict['access_token']
@@ -157,7 +159,7 @@ class MicrosoftGraphClient():
 
         ### Arguments:
         ----
-        token_type {str} --  The type of token you would like to determine lifespan for. 
+        token_type {str} --  The type of token you would like to determine lifespan for.
             Possible values are ['access_token', 'refresh_token'] (default: {access_token})
 
         ### Returns:
@@ -198,7 +200,7 @@ class MicrosoftGraphClient():
 
         Arguments:
         ----
-        nseconds {int} -- The minimum number of seconds the token has to be 
+        nseconds {int} -- The minimum number of seconds the token has to be
             valid for before attempting to get a refresh token. (default: {5})
         """
 

@@ -1,7 +1,4 @@
-from typing import List
 from typing import Dict
-from typing import Union
-
 from ms_graph.session import GraphSession
 
 
@@ -10,7 +7,7 @@ class Drives():
     """
     ## Overview:
     ----
-    The drive resource is the top level object representing a user's OneDrive or a 
+    The drive resource is the top level object representing a user's OneDrive or a
     document library in SharePoint. OneDrive users will always have at least one drive
     available, their default drive. Users without a OneDrive license may not have a default
     drive available.
@@ -97,7 +94,7 @@ class Drives():
         return content
 
     def get_recent_files(self) -> Dict:
-        """List a set of items that have been recently used by the signed in user. 
+        """List a set of items that have been recently used by the signed in user.
 
         ### Overview:
         ----
@@ -139,13 +136,13 @@ class Drives():
         ### Overview:
         ----
         Special folders provide simple aliases to access well-known folders
-        in OneDrive without the need to look up the folder by path (which 
+        in OneDrive without the need to look up the folder by path (which
         would require localization), or reference the folder with an ID. If
-        a special folder is renamed or moved to another location within the 
+        a special folder is renamed or moved to another location within the
         drive, this syntax will continue to find that folder. Special folders
         are automatically created the first time an application attempts to write
         to one, if it doesn't already exist. If a user deletes one, it is recreated
-        when written to again. Note: If you have read-only permissions and request 
+        when written to again. Note: If you have read-only permissions and request
         a special folder that doesn't exist, you'll receive a 403 Forbidden error.
 
         ### Returns

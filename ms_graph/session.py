@@ -1,9 +1,8 @@
 import requests
 
 from pprint import pprint
-from typing import List
 from typing import Dict
-from typing import Union
+
 
 class GraphSession():
 
@@ -43,7 +42,7 @@ class GraphSession():
         -------
         Dict:
             A dictionary containing all the components.
-        """        
+        """
 
         # Fake the headers.
         headers = {
@@ -64,14 +63,14 @@ class GraphSession():
         ----
         str:
             The full URL with the endpoint needed.
-        """        
-        
+        """
+
         url = self.client.RESOURCE + self.client.api_version + "/" + endpoint
 
         return url
 
-    def make_request(self, method: str, endpoint: str, mode: str = None, params: dict = None, data: dict = None, json:dict = None, 
-                     order_details: bool = False) -> Dict:
+    def make_request(self, method: str, endpoint: str, mode: str = None, params: dict = None,
+                     data: dict = None, json: dict = None, order_details: bool = False) -> Dict:
         """Handles all the requests in the library.
 
         ### Overview:
@@ -84,21 +83,21 @@ class GraphSession():
         ----
         method: The Request method, can be one of the
             following: ['get','post','put','delete','patch']
-        
+
         endpoint: The API URL endpoint, example is 'quotes'
 
         mode: The content-type mode, can be one of the
             following: ['form','json']
-        
+
         params: The URL params for the request.
-        
+
         data: A data payload for a request.
 
         json: A json data payload for a request
 
         ### Returns:
         ----
-        A Dictionary object containing the JSON values.            
+        A Dictionary object containing the JSON values.
         """
 
         # Build the URL.
@@ -122,9 +121,10 @@ class GraphSession():
             data=data,
             json=json
         ).prepare()
-        
+
         # Send the request.
-        response: requests.Response = request_session.send(request=request_request)
+        response: requests.Response = request_session.send(
+            request=request_request)
 
         # Close the session.
         request_session.close()

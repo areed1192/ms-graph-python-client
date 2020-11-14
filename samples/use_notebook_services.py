@@ -25,7 +25,7 @@ scopes = [
     'Notes.Create',
     'Notes.Read',
     'Notes.ReadWrite',
-    'Notes.Read.All', 
+    'Notes.Read.All',
     'Notes.ReadWrite.All'
 ]
 
