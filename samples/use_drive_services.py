@@ -10,10 +10,7 @@ scopes = [
     'Directory.ReadWrite.All',
     'User.Read.All',
     'Directory.Read.All',
-    'Directory.ReadWrite.All',
-    # 'offline_access',
-    # 'openid', 
-    # 'profile'
+    'Directory.ReadWrite.All'
 ]
 
 # Initialize the Parser.
@@ -45,14 +42,14 @@ drive_services = graph_client.drives()
 # List the Root Drive.
 pprint(drive_services.get_root_drive())
 
-# # List the Root Drive Deltas.
-# pprint(drive_services.get_root_drive_delta())
+# List the Root Drive Deltas.
+pprint(drive_services.get_root_drive_delta())
 
-# # List the Root Drive Children.
-# pprint(drive_services.get_root_drive_children())
+# List the Root Drive Children.
+pprint(drive_services.get_root_drive_children())
 
-# # List the Root Drive Followers
-# pprint(drive_services.get_root_drive_followed())
+# List the Root Drive Followers
+pprint(drive_services.get_root_drive_followed())
 
 # Grab a Drive by id.
 pprint(drive_services.get_drive_by_id(drive_id='8bc640c57cda25b6'))

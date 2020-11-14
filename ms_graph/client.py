@@ -17,6 +17,7 @@ from ms_graph.drives import Drives
 from ms_graph.groups import Groups
 from ms_graph.notes import Notes
 from ms_graph.session import GraphSession
+from ms_graph.drive_items import DriveItems
 
 from urllib.parse import urlencode, urlparse, quote_plus
 
@@ -354,6 +355,20 @@ class MicrosoftGraphClient():
         drives_object: Drives = Drives(session=self.graph_session)
 
         return drives_object
+
+    def drive_item(self) -> DriveItems:
+        """Used to access the Drive Items Services and metadata.
+
+        ### Returns
+        ---
+        DriveItems:
+            The `DriveItems` services Object.
+        """
+
+        # Grab the Drive Items Object for the session.
+        drive_items_object: Drives = DriveItems(session=self.graph_session)
+
+        return drive_items_object
 
     def groups(self) -> Groups:
         """Used to access the Groups Services and metadata.
