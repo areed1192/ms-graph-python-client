@@ -58,24 +58,6 @@ class Groups():
 
         return content
 
-    def get_my_drives(self) -> Dict:
-
-        content = self.graph_session.make_request(
-            method='get',
-            endpoint=self.collections_endpoint + "/me"
-        )
-
-        return content
-
-    def get_user_drives(self, user_id: str) -> Dict:
-
-        content = self.graph_session.make_request(
-            method='get',
-            endpoint="users/{user_id}/drives".format(user_id=user_id)
-        )
-
-        return content
-
     def get_group_drives(self, group_id: str) -> Dict:
 
         content = self.graph_session.make_request(
