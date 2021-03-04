@@ -11,9 +11,9 @@ scopes = [
     'User.Read.All',
     'Directory.Read.All',
     'Directory.ReadWrite.All',
-    # 'offline_access',
-    # 'openid',
-    # 'profile'
+    'Mail.ReadWrite',
+    'Sites.ReadWrite.All',
+    'ExternalItem.Read.All'
 ]
 
 # Initialize the Parser.
@@ -39,17 +39,26 @@ graph_client = MicrosoftGraphClient(
 # Login to the Client.
 graph_client.login()
 
-# Grab the User Services.
-user_services = graph_client.users()
+# Grab the Search Service.
+search_service = graph_client.search()
 
-# List the Users.
-pprint(user_services.list_users())
+# Search for some documents.
+search_response = search_service.query(
+    search_request={
+        "requests": [
+            {
+                "entityTypes": [
+                    "message"
+                ],
+                "query": {
+                    "queryString": "sigma"
+                },
+                "from": 0,
+                "size": 25
+            }
+        ]
+    }
+)
 
-# Grab the Drive Services.
-drive_services = graph_client.drives()
-
-# List the Root Drive.
-pprint(drive_services.get_root_drive())
-
-# List the Root Drive Deltas.
-pprint(drive_services.get_root_drive_delta())
+# Print the Output.
+pprint(search_response)

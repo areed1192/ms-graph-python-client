@@ -15,6 +15,7 @@ from ms_graph.groups import Groups
 from ms_graph.notes import Notes
 from ms_graph.session import GraphSession
 from ms_graph.drive_items import DriveItems
+from ms_graph.search import Search
 
 
 class MicrosoftGraphClient():
@@ -399,3 +400,17 @@ class MicrosoftGraphClient():
         notes_object: Notes = Notes(session=self.graph_session)
 
         return notes_object
+
+    def search(self) -> Search:
+        """Used to access the Search Services and metadata.
+
+        ### Returns
+        ---
+        Groups:
+            The `Search` services Object.
+        """
+
+        # Grab the `Search` Object for the session.
+        search_object: Search = Search(session=self.graph_session)
+
+        return search_object
