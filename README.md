@@ -77,6 +77,7 @@ from pprint import pprint
 from ms_graph.client import MicrosoftGraphClient
 from configparser import ConfigParser
 
+# Specify your scopes when you want access certain resources.
 scopes = [
     'Calendars.ReadWrite',
     'Files.ReadWrite.All',
