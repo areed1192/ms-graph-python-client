@@ -16,6 +16,7 @@ from ms_graph.notes import Notes
 from ms_graph.session import GraphSession
 from ms_graph.drive_items import DriveItems
 from ms_graph.search import Search
+from ms_graph.personal_contacts import PersonalContacts
 
 
 class MicrosoftGraphClient():
@@ -323,6 +324,10 @@ class MicrosoftGraphClient():
             scopes=self.scope
         )
 
+        if 'error' in token_dict:
+            print(token_dict)
+            raise PermissionError("Permissions not authorized, delete json file and run again.")
+
         # Save the Token.
         self._state(
             action='save',
@@ -414,3 +419,17 @@ class MicrosoftGraphClient():
         search_object: Search = Search(session=self.graph_session)
 
         return search_object
+
+    def personal_contacts(self) -> PersonalContacts:
+        """Used to access the PersonalContacts Services and metadata.
+
+        ### Returns
+        ---
+        Groups:
+            The `PersonalContacts` services Object.
+        """
+
+        # Grab the `PersonalContacts` Object for the session.
+        personal_contacts_object: PersonalContacts = PersonalContacts(session=self.graph_session)
+
+        return personal_contacts_object
