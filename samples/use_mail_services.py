@@ -69,91 +69,45 @@ mail_id_with_attachments = 'AQMkADAwATZiZmYAZC1hMDI2LTE3NTgtMDACLTAwCgBGAAADpjqw
 # Grab the Notes Services.
 mail_services = graph_client.mail()
 
-# # Grab all my Messages.
-# pprint(mail_services.list_my_messages())
+# Grab all my Messages.
+pprint(
+    mail_services.list_my_messages()
+)
 
-# # Grab a specific message for the default user.
-# pprint(mail_services.get_my_messages(message_id=mail_id))
+# Grab a specific message for the default user.
+pprint(
+    mail_services.get_my_messages(
+        message_id=mail_id
+    )
+)
 
-# pprint(
-#     mail_services.get_user_messages(
-#         user_id=user_id,
-#         message_id=mail_id
-#     )
-# )
+# Get a Specific User's Message.
+pprint(
+    mail_services.get_user_messages(
+        user_id=user_id,
+        message_id=mail_id
+    )
+)
 
-# # This creates a draft message.
-# new_message_draft = mail_services.create_my_message(
-#     message={
-#         "subject": "Did you see last night's game?",
-#         "importance": "Low",
-#         "body": {
-#             "contentType": "HTML",
-#             "content": "They were <b>awesome</b>!"
-#         },
-#         "toRecipients": [
-#             {
-#                 "emailAddress": {
-#                     "address": "alexreed1192@gmail.com"
-#                 }
-#             }
-#         ]
-#     }
-# )
-# pprint(new_message_draft)
+# List the rules for a specific user..
+pprint(
+    mail_services.list_rules(user_id=user_id)
+)
 
-# # grab the ID.
-# new_message_id = new_message_draft['id']
+# List the rules for the default user.
+pprint(
+    mail_services.list_my_rules()
+)
 
-# # Method One, send the message by grabbing the ID.
-# mail_services.send_my_message(message_id=new_message_id)
+# List the overrides for a specific user.
+pprint(
+    mail_services.list_overrides(user_id=user_id)
+)
 
-# # List the rules for a specific user..
-# pprint(
-#     mail_services.list_rules(user_id=user_id)
-# )
-
-# # List the rules for the default user.
-# pprint(
-#     mail_services.list_my_rules()
-# )
-
-# # List the overrides for a specific user.
-# pprint(
-#     mail_services.list_overrides(user_id=user_id)
-# )
-
-# # List the overrides for the default user.
-# pprint(
-#     mail_services.list_my_overrides()
-# )
-
-# # Create a new rule for the default user.
-# pprint(
-#     mail_services.create_my_message_rule(
-#         rule={
-#             "displayName": "From partner",
-#             "sequence": 2,
-#             "isEnabled": True,
-#             "conditions": {
-#                 "senderContains": [
-#                     "youtube"
-#                 ]
-#             },
-#             "actions": {
-#                 "forwardTo": [
-#                     {
-#                         "emailAddress": {
-#                             "name": "Alex Reed",
-#                             "address": "coding.sigma@gmail.com"
-#                         }
-#                     }
-#                 ],
-#                 "stopProcessingRules": True
-#             }
-#         }
-#     )
-# )
+# List the overrides for the default user.
+pprint(
+    mail_services.list_my_overrides()
+)
 
 # List the attachments for a specific message.
 pprint(
@@ -161,3 +115,61 @@ pprint(
         message_id=mail_id_with_attachments
     )
 )
+
+
+# Create a new message for the default user. Keep in mind this does not send the mail.
+new_message_draft = mail_services.create_my_message(
+    message={
+        "subject": "Did you see last night's game?",
+        "importance": "Low",
+        "body": {
+            "contentType": "HTML",
+            "content": "They were <b>awesome</b>!"
+        },
+        "toRecipients": [
+            {
+                "emailAddress": {
+                    "address": "alexreed1192@gmail.com"
+                }
+            }
+        ]
+    }
+)
+
+# Check it out.
+pprint(new_message_draft)
+
+# grab the ID.
+new_message_id = new_message_draft['id']
+
+# Send the newly created message.
+mail_services.send_my_message(message_id=new_message_id)
+
+# Let's create a new message rule, this will help with things like incoming mail. We can
+# control what happens to mail that meets certain conditions.
+my_new_message_rule = mail_services.create_my_message_rule(
+    rule={
+        "displayName": "From partner",
+        "sequence": 2,
+        "isEnabled": True,
+        "conditions": {
+            "senderContains": [
+                "youtube"
+            ]
+        },
+        "actions": {
+            "forwardTo": [
+                {
+                    "emailAddress": {
+                        "name": "Alex Reed",
+                        "address": "coding.sigma@gmail.com"
+                    }
+                }
+            ],
+            "stopProcessingRules": True
+        }
+    }
+)
+
+# Check it out.
+pprint(my_new_message_rule)

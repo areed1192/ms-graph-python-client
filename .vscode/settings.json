@@ -3,8 +3,5 @@
   "python.linting.pylintEnabled": false,
   "python.pythonPath": "C:\\Users\\Alex\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
   "python.linting.flake8Enabled": true,
-  "python.linting.flake8Args": [
-    "--max-line-length=120",
-    "--ignore=E402",
-],
+  "python.linting.flake8Args": ["--max-line-length=140", "--ignore=E402"]
 }
