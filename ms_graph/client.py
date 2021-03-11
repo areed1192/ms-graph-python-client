@@ -17,6 +17,7 @@ from ms_graph.session import GraphSession
 from ms_graph.drive_items import DriveItems
 from ms_graph.search import Search
 from ms_graph.personal_contacts import PersonalContacts
+from ms_graph.mail import Mail
 
 
 class MicrosoftGraphClient():
@@ -397,7 +398,7 @@ class MicrosoftGraphClient():
 
         ### Returns
         ---
-        Groups:
+        Notes:
             The `Notes` services Object.
         """
 
@@ -411,7 +412,7 @@ class MicrosoftGraphClient():
 
         ### Returns
         ---
-        Groups:
+        Search:
             The `Search` services Object.
         """
 
@@ -425,7 +426,7 @@ class MicrosoftGraphClient():
 
         ### Returns
         ---
-        Groups:
+        PersonalContacts:
             The `PersonalContacts` services Object.
         """
 
@@ -433,3 +434,17 @@ class MicrosoftGraphClient():
         personal_contacts_object: PersonalContacts = PersonalContacts(session=self.graph_session)
 
         return personal_contacts_object
+
+    def mail(self) -> Mail:
+        """Used to access the Mail Services and metadata.
+
+        ### Returns
+        ---
+        Mail:
+            The `Mail` services Object.
+        """
+
+        # Grab the `Mail` Object for the session.
+        mail_service: Mail = Mail(session=self.graph_session)
+
+        return mail_service

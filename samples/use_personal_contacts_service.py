@@ -44,7 +44,8 @@ graph_client.login()
 user_id = '8bc640c57cda25b6'
 
 # Define a folder ID.
-folder_id = 'AQMkADAwATZiZmYAZC1hMDI2LTE3NTgtMDACLTAwCgAuAAADpjqwNb_dak68rN7703uffQEAFNKsLOjbGUuHHmYnyKdJiAAFAP8ORwAAAA=='
+folder_id = 'AQMkADAwATZiZmYAZC1hMDI2LTE3NTgtMDACLTAwCgAuAAADpjqwNb_d' + \
+            'ak68rN7703uffQEAFNKsLOjbGUuHHmYnyKdJiAAFAP8ORwAAAA=='
 
 # Grab the Personal Contacts Service.
 personal_contacts_service = graph_client.personal_contacts()

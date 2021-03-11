@@ -124,14 +124,20 @@ class GraphSession():
 
         # Send the request.
         response: requests.Response = request_session.send(
-            request=request_request)
+            request=request_request
+        )
 
         # Close the session.
         request_session.close()
 
         # If it's okay and no details.
-        if response.ok:
+        if response.ok and len(response.content) > 0:
             return response.json()
-        else:
+        elif len(response.content) > 0 and response.ok:
+            return {
+                'message': 'response successful',
+                'status_code': response.status_code
+            }
+        elif not response.ok:
             pprint(response.json())
             raise requests.HTTPError()
