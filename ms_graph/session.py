@@ -1,6 +1,7 @@
+import json as json_lib
 import requests
+import logging
 
-from pprint import pprint
 from typing import Dict
 
 
@@ -28,7 +29,16 @@ class GraphSession():
 
         from ms_graph.client import MicrosoftGraphClient
 
+        # We can also add custom formatting to our log messages.
+        log_format = '%(asctime)-15s|%(filename)s|%(message)s'
+
         self.client: MicrosoftGraphClient = client
+        logging.basicConfig(
+            filename="logs/log_file_custom.log",
+            level=logging.INFO,
+            encoding="utf-8",
+            format=log_format
+        )
 
     def build_headers(self, mode: str = 'json') -> Dict:
         """Used to build the headers needed to make the request.
@@ -106,7 +116,9 @@ class GraphSession():
         # Define the headers.
         headers = self.build_headers(mode='json')
 
-        print(url)
+        logging.info(
+            "URL: {url}".format(url=url)
+        )
 
         # Define a new session.
         request_session = requests.Session()
@@ -139,5 +151,19 @@ class GraphSession():
                 'status_code': response.status_code
             }
         elif not response.ok:
-            pprint(response.json())
+
+            # Define the error dict.
+            error_dict = {
+                'error_code': response.status_code,
+                'response_url': response.url,
+                'response_body': json_lib.loads(response.content.decode('ascii')),
+                'response_request': dict(response.request.headers),
+                'response_method': response.request.method,
+            }
+
+            # Log the error.
+            logging.error(
+                msg=json_lib.dumps(obj=error_dict, indent=4)
+            )
+
             raise requests.HTTPError()

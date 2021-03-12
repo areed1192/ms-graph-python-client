@@ -10,10 +10,7 @@ scopes = [
     'Directory.ReadWrite.All',
     'User.Read.All',
     'Directory.Read.All',
-    'Directory.ReadWrite.All',
-    # 'offline_access',
-    # 'openid',
-    # 'profile'
+    'Directory.ReadWrite.All'
 ]
 
 # Initialize the Parser.

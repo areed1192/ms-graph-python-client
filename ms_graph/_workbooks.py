@@ -28,3 +28,6 @@ class Workbooks():
 
         # Set the endpoint.
         self.endpoint = 'workbook'
+
+    def create_session(self) -> Dict:
+        pass
