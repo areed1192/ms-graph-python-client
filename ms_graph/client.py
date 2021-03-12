@@ -214,7 +214,7 @@ class MicrosoftGraphClient():
         """Attempts a Silent Authentication using the Access Token and Refresh Token.
 
         Returns
-        -------
+        ----
         (bool)
             `True` if it was successful and `False` if it failed.
         """

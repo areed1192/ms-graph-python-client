@@ -5,6 +5,13 @@ from ms_graph.session import GraphSession
 class Groups():
 
     def __init__(self, session: object) -> None:
+        """Initializes the `Group` service.
+
+        ### Parameters
+        ----
+        session : object
+            An authenticated session for our Microsoft Graph Client.
+        """
 
         # Set the session.
         self.graph_session: GraphSession = session
@@ -14,55 +21,21 @@ class Groups():
         self.collections_endpoint = 'groups'
 
     def list_groups(self) -> Dict:
+        """List all the groups in an organization, including but
+        not limited to Microsoft 365 groups.
+
+        ### Returns
+        -------
+        Dict
+            If successful, this method returns a 200 OK
+            response code and collection of group objects in
+            the response body. The response includes only the
+            default properties of each group.
+        """
 
         content = self.graph_session.make_request(
             method='get',
             endpoint=self.collections_endpoint
-        )
-
-        return content
-
-    def get_root_drive_children(self) -> Dict:
-
-        content = self.graph_session.make_request(
-            method='get',
-            endpoint=self.endpoint + "/root/children"
-        )
-
-        return content
-
-    def get_root_drive_delta(self) -> Dict:
-
-        content = self.graph_session.make_request(
-            method='get',
-            endpoint=self.endpoint + "/root/delta"
-        )
-
-        return content
-
-    def get_root_drive_followed(self) -> Dict:
-
-        content = self.graph_session.make_request(
-            method='get',
-            endpoint=self.endpoint + "/root/followed"
-        )
-
-        return content
-
-    def get_drive_by_id(self, drive_id: str) -> Dict:
-
-        content = self.graph_session.make_request(
-            method='get',
-            endpoint=self.collections_endpoint + "/{id}".format(id=drive_id)
-        )
-
-        return content
-
-    def get_group_drives(self, group_id: str) -> Dict:
-
-        content = self.graph_session.make_request(
-            method='get',
-            endpoint="groups/{group_id}/drives".format(group_id=group_id)
         )
 
         return content

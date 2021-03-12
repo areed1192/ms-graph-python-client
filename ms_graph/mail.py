@@ -4,11 +4,20 @@ from ms_graph.session import GraphSession
 
 class Mail():
 
+    """
+    ## Overview:
+    ----
+    Microsoft Graph lets your app get authorized access to a user's
+    Outlook mail data in a personal or organization account. With the
+    appropriate delegated or application mail permissions, your app can
+    access the mail data of the signed-in user or any user in a tenant.
+    """
+
     def __init__(self, session: object) -> None:
         """Initializes the `Mail` service.
 
         ### Parameters
-        ----------
+        ----
         session : object
             An authenticated session for our Microsoft Graph Client.
         """
@@ -24,7 +33,7 @@ class Mail():
         (including the Deleted Items and Clutter folders).
 
         ### Returns
-        -------
+        ----
         Dict
             If successful, this method returns a 200 OK response
             code and collection of `Message` objects in the response
@@ -43,12 +52,12 @@ class Mail():
         (including the Deleted Items and Clutter folders).
 
         ### Parameters
-        ----------
+        ----
         user_id : str
             The user for which to query messages for.
 
         ### Returns
-        -------
+        ----
         Dict
             If successful, this method returns a 200 OK response
             code and collection of `Message` objects in the response
@@ -66,19 +75,19 @@ class Mail():
         """Use this API to create a draft of a new message.
 
         ### Overview:
-        ----------
+        ----
         Drafts can be created in any folder and optionally
         updated before sending. To save to the Drafts folder,
         use the /messages shortcut.
 
         ### Parameters
-        ----------
+        ----
         message : dict
             A JSON payload with the required message
             attributes.
 
         ### Returns
-        ----------
+        ----
         dict
             If successful, this method returns 201 Created
             response code and `message` object in the response
@@ -98,19 +107,19 @@ class Mail():
         user ID.
 
         ### Overview:
-        ----------
+        ----
         Drafts can be created in any folder and optionally
         updated before sending. To save to the Drafts folder,
         use the /messages shortcut.
 
         ### Parameters
-        ----------
+        ----
         message : dict
             A JSON payload with the required message
             attributes.
 
         ### Returns
-        ----------
+        ----
         dict
             If successful, this method returns 201 Created
             response code and `message` object in the response
@@ -130,12 +139,12 @@ class Mail():
         the default user.
 
         ### Parameters
-        ----------
+        ----
         message_id : str
             The message ID you want to query.
 
         ### Returns
-        ----------
+        ----
         dict
             If successful, this method returns 200 successful
             response code and `message` object in the response
@@ -156,7 +165,7 @@ class Mail():
         a specific user.
 
         ### Parameters
-        ----------
+        ----
         user_id : str
             The User ID you want to query messages for.
 
@@ -164,7 +173,7 @@ class Mail():
             The message ID you want to query.
 
         ### Returns
-        ----------
+        ----
         dict
             If successful, this method returns 200 successful
             response code and `message` object in the response
@@ -186,13 +195,13 @@ class Mail():
         default user.
 
         ### Parameters
-        ----------
+        ----
         message : str
             In the request body, supply the values for relevant
             fields that should be updated.
 
         ### Returns
-        ----------
+        ----
         dict
             If successful, this method returns a 200 OK response code
             and updated `message` object in the response body.
@@ -211,7 +220,7 @@ class Mail():
         specified user.
 
         ### Parameters
-        ----------
+        ----
         user_id : str
             The user for which to update a message for.
 
@@ -220,7 +229,7 @@ class Mail():
             fields that should be updated.
 
         ### Returns
-        ----------
+        ----
         dict
             If successful, this method returns a 200 OK response code
             and updated `message` object in the response body.
@@ -239,12 +248,12 @@ class Mail():
         or delete a relationship of the message.
 
         ### Parameters
-        ----------
+        ----
         message_id : str
             The ID of the message you wish to delete.
 
         ### Returns
-        ----------
+        ----
         dict
             If successful, this method returns a 204 No Content
             response code. It does not return anything in
@@ -265,7 +274,7 @@ class Mail():
         or delete a relationship of the message.
 
         ### Parameters
-        ----------
+        ----
         user_id : str
             The user for which to delete a message for.
 
@@ -273,7 +282,7 @@ class Mail():
             The ID of the message you wish to delete.
 
         ### Returns
-        ----------
+        ----
         dict
             If successful, this method returns a 204 No Content
             response code. It does not return anything in
@@ -294,18 +303,18 @@ class Mail():
         """Send a message in the draft folder for the default user.
 
         ### Overview:
-        ----------
+        ----
         The draft message can be a new message draft,
         reply draft, reply-all draft, or a forward draft.
         The message is then saved in the Sent Items folder.
 
         ### Parameters
-        ----------
+        ----
         message_id : str
             The ID of the message you wish to send.
 
         ### Returns
-        ----------
+        ----
         dict
             If successful, this method returns 202 Accepted
             response code. It does not return anything in
@@ -325,13 +334,13 @@ class Mail():
         """Send a message in the draft folder for the specified user.
 
         ### Overview:
-        ----------
+        ----
         The draft message can be a new message draft,
         reply draft, reply-all draft, or a forward draft.
         The message is then saved in the Sent Items folder.
 
         ### Parameters
-        ----------
+        ----
         user_id : str
             The user for which to send a message for.
 
@@ -339,7 +348,7 @@ class Mail():
             The ID of the message you wish to send.
 
         ### Returns
-        ----------
+        ----
         dict
             If successful, this method returns 202 Accepted
             response code. It does not return anything in
@@ -357,6 +366,29 @@ class Mail():
         return content
 
     def copy_my_message(self, message_id: str) -> dict:
+        """Send a message in the draft folder for the specified user.
+
+        ### Overview:
+        ----
+        The draft message can be a new message draft,
+        reply draft, reply-all draft, or a forward draft.
+        The message is then saved in the Sent Items folder.
+
+        ### Parameters
+        ----
+        user_id : str
+            The user for which to send a message for.
+
+        message_id : str
+            The ID of the message you wish to send.
+
+        ### Returns
+        ----
+        dict
+            If successful, this method returns 202 Accepted
+            response code. It does not return anything in
+            the response body.
+        """        
 
         content = self.graph_session.make_request(
             method='post',
@@ -564,13 +596,13 @@ class Mail():
         """Send the message specified in the request body.
 
         ### Overview:
-        -----------
+        ----
         The message is saved in the Sent Items folder by default. You
         can include a file attachment in the same sendMail action call.
 
 
         ### Parameters
-        -----------
+        ----
         user_id : str
             The user for which to send a mailItem resource for.
 
@@ -582,7 +614,7 @@ class Mail():
             only if the parameter is false, by default True.
 
         ### Returns
-        ----------
+        ----
         Dict
             If successful, this method returns 202 Accepted response code.
             It does not return anything in the response body.
@@ -604,13 +636,13 @@ class Mail():
         """Retrieve a list of `attachment` objects attached to a message.
 
         ### Parameters
-        ----------
+        ----
         message_id : str
             The message Id of the mailItem resource that
             you want to query attachments for.
 
         ### Returns
-        ---------
+        ----
         Dict
             If successful, this method returns a 200 OK response code
             and collection of Attachment objects in the response body.
@@ -629,7 +661,7 @@ class Mail():
         the default user.
 
         ### Returns
-        ---------
+        ----
         Dict
             If successful, this method returns a 200 OK response code
             and collection of messageRule objects in the response body.
@@ -650,7 +682,7 @@ class Mail():
         the default user.
 
         ### Returns
-        ----------
+        ----
         Dict
             If successful, this method returns a 200 OK response code
             and collection of messageRule objects in the response body.
@@ -668,12 +700,12 @@ class Mail():
         the specific user.
 
         ### Parameters
-        ----------
+        ----
         user_id : str
             The user ID for which to query `messageRules` for.
 
         ### Returns
-        ----------
+        ----
         Dict
             If successful, this method returns a 200 OK response code
             and collection of messageRule objects in the response body.
@@ -693,13 +725,13 @@ class Mail():
         the default user.
 
         ### Parameters
-        ----------
+        ----
         rule : Dict
             The parameters that are applicable to your rule. For
             more info: https://docs.microsoft.com/en-us/graph/api/mailfolder-post-messagerules?view=graph-rest-1.0&tabs=http#request-body
 
         ### Returns
-        ----------
+        ----
         Dict
             If successful, this method returns 201 Created response code and a
             `messageRule` object in the response body.
@@ -718,7 +750,7 @@ class Mail():
         for the specified User.
 
         ### Parameters
-        ----------
+        ----
         user_id : str
             The User ID for which to create the message rule
             for.
@@ -728,7 +760,7 @@ class Mail():
             more info: https://docs.microsoft.com/en-us/graph/api/mailfolder-post-messagerules?view=graph-rest-1.0&tabs=http#request-body
 
         ### Returns
-        ----------
+        ----
         Dict
             If successful, this method returns 201 Created response code and a
             `messageRule` object in the response body.
@@ -749,7 +781,7 @@ class Mail():
         certain senders in specific ways.
 
         ### Returns
-        ----------
+        ----
         Dict
             If successful, this method returns a 200 OK response code and a collection
             of `inferenceClassificationOverride1 objects in the response body. An
@@ -769,13 +801,13 @@ class Mail():
         certain senders in specific ways.
 
         ### Parameters
-        ----------
+        ----
         user_id : str
             The User ID for which to query `inferenceClassificationOverride`
             objects for.
 
         ### Returns
-        ----------
+        ----
         Dict
             If successful, this method returns a 200 OK response code and a collection
             of `inferenceClassificationOverride` objects in the response body. An

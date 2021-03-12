@@ -327,18 +327,3 @@ class DriveItems():
         )
 
         return content
-
-
-# GET /drives/{drive-id}/items/{item-id}
-# GET /drives/{drive-id}/root:/{item-path}
-# GET /groups/{group-id}/drive/items/{item-id}
-# GET /groups/{group-id}/drive/root:/{item-path}
-# GET /me/drive/items/{item-id}
-# GET /me/drive/root:/{item-path}
-
-# GET /sites/{site-id}/drive/items/{item-id}
-# GET /sites/{site-id}/drive/root:/{item-path}
-# GET /sites/{site-id}/lists/{list-id}/items/{item-id}/driveItem
-
-# GET /users/{user-id}/drive/items/{item-id}
-# GET /users/{user-id}/drive/root:/{item-path}

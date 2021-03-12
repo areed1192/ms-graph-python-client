@@ -34,12 +34,12 @@ class GraphSession():
         """Used to build the headers needed to make the request.
 
         ### Parameters
-        ----------
+        ----
         mode: str, optional
             The content mode the headers is being built for, by default `json`.
 
         ### Returns
-        -------
+        ----
         Dict:
             A dictionary containing all the components.
         """
