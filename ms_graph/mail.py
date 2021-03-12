@@ -376,19 +376,16 @@ class Mail():
 
         ### Parameters
         ----
-        user_id : str
-            The user for which to send a message for.
-
         message_id : str
             The ID of the message you wish to send.
 
         ### Returns
         ----
-        dict
+        Dict
             If successful, this method returns 202 Accepted
             response code. It does not return anything in
             the response body.
-        """        
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -400,7 +397,29 @@ class Mail():
         return content
 
     def copy_user_message(self, user_id: str, message_id: str) -> Dict:
+        """Send a message in the draft folder for the specified user.
 
+        ### Overview:
+        ----
+        The draft message can be a new message draft,
+        reply draft, reply-all draft, or a forward draft.
+        The message is then saved in the Sent Items folder.
+
+        ### Parameters
+        ----
+        user_id : str
+            The user for which to send a message for.
+
+        message_id : str
+            The ID of the message you wish to send.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 202 Accepted
+            response code. It does not return anything in
+            the response body.
+        """
         content = self.graph_session.make_request(
             method='post',
             endpoint='/users/{user_id}/messages/{message_id}/copy'.format(
@@ -412,6 +431,28 @@ class Mail():
         return content
 
     def move_my_message(self, message_id: str, destination_id: str) -> dict:
+        """Move a message to another folder within the specified user's mailbox.
+        For the default user.
+
+        ### Overview:
+        ----
+        This creates a new copy of the message in the destination folder and
+        removes the original message.
+
+        ### Parameters
+        ----
+        message_id : str
+            The ID of the message you wish to move.
+
+        destination_id : str
+            The name of the folder you want to move it to.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 201 Created response
+            code and `Message` object in the response body.
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -424,6 +465,31 @@ class Mail():
         return content
 
     def move_user_message(self, user_id: str, message_id: str, destination_id: str) -> Dict:
+        """Move a message to another folder within the specified user's mailbox.
+
+        ### Overview:
+        ----
+        This creates a new copy of the message in the destination folder and
+        removes the original message.
+
+        ### Parameters
+        ----
+        user_id : str
+            The user ID of the mailbox that you want to move a
+            message for.
+
+        message_id : str
+            The ID of the message you wish to move.
+
+        destination_id : str
+            The name of the folder you want to move it to.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 201 Created response
+            code and `Message` object in the response body.
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -437,7 +503,27 @@ class Mail():
         return content
 
     def create_reply_my_message(self, message_id: str) -> dict:
+        """Create a draft of the reply to the specified message. For
+        the default user.
 
+        ### Overview:
+        ----
+        You can then update the draft to add reply content to the
+        body or change other message properties, or, simply send
+        the draft.
+
+        ### Parameters
+        ----
+        message_id : str
+            The message ID for which you wish to use
+            as a reply message.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 201 Created response
+            code and `Message` object in the response body.
+        """
         content = self.graph_session.make_request(
             method='post',
             endpoint='/me/messages/{message_id}/createReply'.format(
@@ -448,6 +534,30 @@ class Mail():
         return content
 
     def create_reply_user_message(self, user_id: str, message_id: str) -> Dict:
+        """Create a draft of the reply to the specified message.
+
+        ### Overview:
+        ----
+        You can then update the draft to add reply content to the
+        body or change other message properties, or, simply send
+        the draft.
+
+        ### Parameters
+        ----
+        user_id : str
+            The user ID of the mailbox that you want to create a
+            reply message for.
+
+        message_id : str
+            The message ID for which you wish to use
+            as a reply message.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 201 Created response
+            code and `Message` object in the response body.
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -460,6 +570,24 @@ class Mail():
         return content
 
     def reply_to_my_message(self, message_id: str, message: dict) -> dict:
+        """Reply to the sender of a message, add a comment or modify any updateable properties
+        all in one reply call. The message is then saved in the Sent Items folder. For the
+        default user.
+
+        ### Parameters
+        ----
+        message_id : str
+            The message ID for which you wish to reply to.
+
+        messgae : dict
+            The message you want to reply with.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 202 Accepted response
+            code. It does not return anything in the response body.
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -472,6 +600,28 @@ class Mail():
         return content
 
     def reply_to_user_message(self, user_id: str, message_id: str, message: dict) -> Dict:
+        """Reply to the sender of a message, add a comment or modify any updateable properties
+        all in one reply call. The message is then saved in the Sent Items folder.
+
+
+        ### Parameters
+        ----
+        user_id : str
+            The user ID of the mailbox that contains the message
+            you want to reply to.
+
+        message_id : str
+            The message ID for which you wish to reply to.
+
+        messgae : dict
+            The message you want to reply with.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 202 Accepted response
+            code. It does not return anything in the response body.
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -485,6 +635,26 @@ class Mail():
         return content
 
     def create_reply_all_my_message(self, message_id: str) -> dict:
+        """Create a draft to reply to the sender and all the recipients of the specified message.
+        For the default user.
+
+        ### Overview:
+        ----
+        You can then update the draft to add reply content to the body
+        or change other message properties, or, simply send the draft.
+
+        ### Parameters
+        ----
+        message_id : str
+            The message ID for which you wish to use
+            as a repy message
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 201 Created response
+            code and `Message` object in the response body.
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -496,6 +666,31 @@ class Mail():
         return content
 
     def create_reply_all_user_message(self, user_id: str, message_id: str) -> Dict:
+        """Create a draft to reply to the sender and all the recipients of the specified message.
+
+        ### Overview:
+        ----
+        You can then update the draft to add reply content to the body
+        or change other message properties, or, simply send the draft.
+
+        ### Parameters
+        ----
+        message_id : str
+            The message ID for which you wish to reply all
+            to.
+
+        user_id : str
+            The User ID you want to reply all messages for.
+
+        message : dict
+            The message you want to respond with.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 201 Created response
+            code and `Message` object in the response body.
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -508,6 +703,29 @@ class Mail():
         return content
 
     def reply_all_my_message(self, message_id: str, message: dict) -> dict:
+        """Create a draft to reply to the sender and all the recipients of the
+        specified message for the default user.
+
+        ### Overview:
+        ----
+        You can then update the draft to add reply content to the body
+        or change other message properties, or, simply send the draft.
+
+        ### Parameters
+        ----
+        message_id : str
+            The message ID for which you wish to reply all
+            to.
+
+        message : dict
+            The message you want to respond with.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 201 Created response
+            code and `Message` object in the response body.
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -520,6 +738,31 @@ class Mail():
         return content
 
     def reply_all_user_message(self, user_id: str, message_id: str, message: dict) -> Dict:
+        """Create a draft to reply to the sender and all the recipients of the specified message.
+
+        ### Overview:
+        ----
+        You can then update the draft to add reply content to the body
+        or change other message properties, or, simply send the draft.
+
+        ### Parameters
+        ----
+        message_id : str
+            The message ID for which you wish to reply all
+            to.
+
+        user_id : str
+            The User ID you want to reply all messages for.
+
+        message : dict
+            The message you want to respond with.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 201 Created response
+            code and `Message` object in the response body.
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -533,6 +776,25 @@ class Mail():
         return content
 
     def create_forward_my_message(self, message_id: str) -> dict:
+        """Create a draft to forward the specified message. For the default user.
+
+        ### Overview:
+        ----
+        You can then update the draft to add content to the body
+        or change other message properties, or, simply send the
+        draft.
+
+        ### Parameters
+        ----
+        message_id : str
+            The message ID for which you wish to forward.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 201 Created response
+            code and `Message` object in the response body.
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -544,6 +806,29 @@ class Mail():
         return content
 
     def create_forward_user_message(self, user_id: str, message_id: str) -> Dict:
+        """Create a draft to forward the specified message.
+
+        ### Overview:
+        ----
+        You can then update the draft to add content to the body
+        or change other message properties, or, simply send the
+        draft.
+
+        ### Parameters
+        ----
+        message_id : str
+            The message ID for which you wish to forward.
+
+        user_id : dict
+            The User ID you want to create a new forward
+            message for.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 201 Created response
+            code and Message object in the response body.
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -556,6 +841,23 @@ class Mail():
         return content
 
     def forward_my_message(self, message_id: str, message: dict) -> dict:
+        """Forward a message for the default user. The message is saved in the
+        Sent Items folder.
+
+        ### Parameters
+        ----
+        message_id : str
+            The message ID for which you wish to forward.
+
+        message : dict
+            The message to send.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 202 Accepted response code.
+            It does not return anything in the response body.
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -568,6 +870,26 @@ class Mail():
         return content
 
     def forward_user_message(self, user_id: str, message_id: str, message: dict) -> Dict:
+        """Forward a message. The message is saved in the Sent Items folder.
+
+        ### Parameters
+        ----
+        user_id : str
+            The user ID which contains the email you want to
+            forward.
+
+        message_id : str
+            The message ID for which you wish to forward.
+
+        message : dict
+            The message to send.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 202 Accepted response code.
+            It does not return anything in the response body.
+        """
 
         content = self.graph_session.make_request(
             method='post',
@@ -580,7 +902,29 @@ class Mail():
 
         return content
 
-    def send_my_mail(self, message_id: str, message: dict, save_to_send_items: bool) -> dict:
+    def send_my_mail(self, message_id: str, message: dict, save_to_send_items: bool = True) -> dict:
+        """Send the message specified in the request body for the default user.
+
+        ### Overview:
+        ----
+        The message is saved in the Sent Items folder by default. You
+        can include a file attachment in the same sendMail action call.
+
+        ### Parameters
+        ----
+        message_id : dict
+            The message ID for which you want to send.
+
+        save_to_send_items : bool (optional)
+            Indicates whether to save the message in Sent Items. Specify
+            it only if the parameter is false; default is true.
+
+        ### Returns
+        ----
+        Dict
+            If successful, this method returns 202 Accepted response code.
+            It does not return anything in the response body.
+        """
 
         message['saveToSentItems'] = save_to_send_items
 

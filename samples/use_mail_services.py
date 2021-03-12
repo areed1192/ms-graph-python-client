@@ -4,11 +4,9 @@ from ms_graph.client import MicrosoftGraphClient
 
 # SCOPES NEEDED:
 # ---------------
-# 'Notes.Create
-# 'Notes.Read'
-# 'Notes.ReadWrite'
-# 'Notes.Read.All',
-# 'Notes.ReadWrite.All'
+# 'Mail.Send',
+# 'MailboxSettings.Read',
+# 'MailboxSettings.ReadWrite'
 
 # Define the Scopes needed to Login.
 scopes = [
