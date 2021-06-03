@@ -10,7 +10,6 @@ from ms_graph.users import Users
 from ms_graph.search import Search
 from ms_graph.drives import Drives
 from ms_graph.groups import Groups
-from ms_graph.session import GraphSession
 from ms_graph.drive_items import DriveItems
 from ms_graph.personal_contacts import PersonalContacts
 

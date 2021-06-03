@@ -1,6 +1,7 @@
 import json as json_lib
 import requests
 import logging
+import pathlib
 
 from typing import Dict
 
@@ -31,6 +32,10 @@ class GraphSession():
 
         # We can also add custom formatting to our log messages.
         log_format = '%(asctime)-15s|%(filename)s|%(message)s'
+
+        if not pathlib.Path('logs').exists():
+            pathlib.Path('logs').mkdir()
+            pathlib.Path('logs/log_file_custom.log').touch()
 
         self.client: MicrosoftGraphClient = client
         logging.basicConfig(
