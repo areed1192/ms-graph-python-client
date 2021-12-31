@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
 
     steps:
       - uses: actions/checkout@v2
@@ -40,4 +40,4 @@ jobs:
       - name: Test with Unittest.
         run: |
           # If we have a testing folder, then run with unittest.
-          if [ -f tests/test_clients.py ]; then python -m unittest tests/test_client.py; fi
+          if [ -f tests/test_clients.py ]; then python -m unittest tests/test_clients.py; fi
