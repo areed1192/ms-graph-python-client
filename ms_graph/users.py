@@ -1,4 +1,3 @@
-from typing import Dict
 from ms_graph.session import GraphSession
 
 
@@ -25,14 +24,14 @@ class Users():
         self.graph_session: GraphSession = session
 
         # Set the endpoint.
-        self.endpoint = 'users'
+        self.endpoint = "users"
 
-    def list_users(self) -> Dict:
+    def list_users(self) -> dict:
         """Retrieve a list of user objects.
 
         ### Returns
         ----
-        Dict :
+        dict :
             If successful, this method returns a 200 OK response code
             and collection of user objects in the response body. If a
             large user collection is returned, you can use paging in your
@@ -40,7 +39,7 @@ class Users():
         """
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=self.endpoint
         )
 

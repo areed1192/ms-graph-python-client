@@ -17,7 +17,7 @@ scopes = [
 config = ConfigParser()
 
 # Read the file.
-config.read('configs/config.ini')
+config.read('config/config.ini')
 
 # Get the specified credentials.
 client_id = config.get('graph_api', 'client_id')

@@ -1,4 +1,3 @@
-from typing import Dict
 from ms_graph.session import GraphSession
 
 
@@ -25,15 +24,15 @@ class PersonalContacts():
         self.graph_session: GraphSession = session
 
         # Set the endpoint.
-        self.endpoint = 'contacts'
-        self.endpoint_folders = 'contactFolders'
+        self.endpoint = "contacts"
+        self.endpoint_folders = "contactFolders"
 
-    def list_my_contacts(self) -> Dict:
+    def list_my_contacts(self) -> dict:
         """Retrieves all the contacts from the users mailbox.
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `Contact` Resource Object.
         """
 
@@ -41,18 +40,18 @@ class PersonalContacts():
         endpoint = "me/" + self.endpoint
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def list_my_contacts_folder(self) -> Dict:
+    def list_my_contacts_folder(self) -> dict:
         """Retrieves all the contacts folders from the users mailbox.
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `ContactFolders` Resource Object.
         """
 
@@ -60,13 +59,13 @@ class PersonalContacts():
         endpoint = "me/" + self.endpoint_folders
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def list_contacts_folder_by_id(self, user_id: str, folder_id: str) -> Dict:
+    def list_contacts_folder_by_id(self, user_id: str, folder_id: str) -> dict:
         """Retrieves all the contacts folders from the users mailbox.
 
         ### Parameters
@@ -79,33 +78,33 @@ class PersonalContacts():
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `ContactFolders` Resource Object.
         """
 
         # define the endpoints.
-        endpoint = "users/{user_id}/".format(user_id=user_id) + self.endpoint_folders + "/{id}".format(id=folder_id)
+        endpoint = f"users/{user_id}/" + self.endpoint_folders + f"/{folder_id}"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def create_my_contact_folder(self, folder_resource: Dict) -> Dict:
+    def create_my_contact_folder(self, folder_resource: dict) -> dict:
         """Creates a new Contact Folder under the default users profile.
 
         ### Parameters
         ----
-        folder_resource : Dict
+        folder_resource : dict
             A dictionary that specifies the folder resource
             attributes like the folder ID and folder display
             value.
 
         ### Returns
         ----
-        Dict:
+        dict:
             A `ContactFolder` Resource Object.
         """
 
@@ -113,14 +112,14 @@ class PersonalContacts():
         endpoint = "me/" + self.endpoint_folders
 
         content = self.graph_session.make_request(
-            method='post',
+            method="post",
             endpoint=endpoint,
             json=folder_resource
         )
 
         return content
 
-    def create_user_contact_folder(self, user_id: str, folder_resource: Dict) -> Dict:
+    def create_user_contact_folder(self, user_id: str, folder_resource: dict) -> dict:
         """Creates a new Contact Folder under the specified users profile.
 
         ### Parameters
@@ -128,29 +127,29 @@ class PersonalContacts():
         user_id : str
             The User ID that the folder belongs to.
 
-        folder_resource : Dict
+        folder_resource : dict
             A dictionary that specifies the folder resource
             attributes like the folder ID and folder display
             value.
 
         ### Returns
         ----
-        Dict:
+        dict:
             A `ContactFolder` Resource Object.
         """
 
         # define the endpoints.
-        endpoint = "users/{user_id}/".format(user_id=user_id) + self.endpoint_folders
+        endpoint = f"users/{user_id}/" + self.endpoint_folders
 
         content = self.graph_session.make_request(
-            method='post',
+            method="post",
             endpoint=endpoint,
             json=folder_resource
         )
 
         return content
 
-    def get_my_contacts_folder_by_id(self, folder_id: str) -> Dict:
+    def get_my_contacts_folder_by_id(self, folder_id: str) -> dict:
         """Retrieves a contactsFolder resource using the specified ID.
 
         ### Parameters
@@ -160,21 +159,21 @@ class PersonalContacts():
 
         ### Returns
         ----
-        Dict:
+        dict:
             A `ContactFolder` Resource Object.
         """
 
         # define the endpoints.
-        endpoint = "me/" + self.endpoint_folders + "/{id}".format(id=folder_id)
+        endpoint = "me/" + self.endpoint_folders + f"/{folder_id}"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def get_contacts_folder_by_id(self, user_id: str, folder_id: str) -> Dict:
+    def get_contacts_folder_by_id(self, user_id: str, folder_id: str) -> dict:
         """Retrieves a contactsFolder resource using the specified ID for the
         specified user.
 
@@ -188,21 +187,21 @@ class PersonalContacts():
 
         ### Returns
         ----
-        Dict:
+        dict:
             A `ContactFolder` Resource Object.
         """
 
         # define the endpoints.
-        endpoint = "users/{user_id}/".format(user_id=user_id) + self.endpoint_folders + "/{id}".format(id=folder_id)
+        endpoint = f"users/{user_id}/" + self.endpoint_folders + f"/{folder_id}"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def get_my_contact_by_id(self, contact_id: str) -> Dict:
+    def get_my_contact_by_id(self, contact_id: str) -> dict:
         """Retrieves the Contact Resource for the specified contact ID.
 
         ### Parameters
@@ -212,15 +211,15 @@ class PersonalContacts():
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `Contact` Resource Object.
         """
 
         # define the endpoints.
-        endpoint = "me/" + self.endpoint + "/{id}".format(id=contact_id)
+        endpoint = "me/" + self.endpoint + f"/{contact_id}"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 

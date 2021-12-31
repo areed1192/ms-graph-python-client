@@ -1,13 +1,12 @@
-from typing import Dict
 from ms_graph.session import GraphSession
 
 
-class Mail():
+class Mail:
 
     """
     ## Overview:
     ----
-    Microsoft Graph lets your app get authorized access to a user's
+    Microsoft Graph lets your app get authorized access to a user"s
     Outlook mail data in a personal or organization account. With the
     appropriate delegated or application mail permissions, your app can
     access the mail data of the signed-in user or any user in a tenant.
@@ -26,29 +25,26 @@ class Mail():
         self.graph_session: GraphSession = session
 
         # Set the endpoint.
-        self.endpoint = 'mail'
+        self.endpoint = "mail"
 
-    def list_my_messages(self) -> Dict:
-        """Get the messages in the signed-in user's mailbox
+    def list_my_messages(self) -> dict:
+        """Get the messages in the signed-in user"s mailbox
         (including the Deleted Items and Clutter folders).
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns a 200 OK response
             code and collection of `Message` objects in the response
             body.
         """
 
-        content = self.graph_session.make_request(
-            method='get',
-            endpoint='/me/messages'
-        )
+        content = self.graph_session.make_request(method="get", endpoint="/me/messages")
 
         return content
 
-    def list_user_messages(self, user_id: str) -> Dict:
-        """Get the messages in the user's mailbox
+    def list_user_messages(self, user_id: str) -> dict:
+        """Get the messages in the user"s mailbox
         (including the Deleted Items and Clutter folders).
 
         ### Parameters
@@ -58,15 +54,14 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns a 200 OK response
             code and collection of `Message` objects in the response
             body.
         """
 
         content = self.graph_session.make_request(
-            method='get',
-            endpoint='/users/{user_id}/messages'.format(user_id=user_id)
+            method="get", endpoint=f"/users/{user_id}/messages"
         )
 
         return content
@@ -95,14 +90,12 @@ class Mail():
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/me/messages',
-            json=message
+            method="post", endpoint="/me/messages", json=message
         )
 
         return content
 
-    def create_user_message(self, user_id: str, message: dict) -> Dict:
+    def create_user_message(self, user_id: str, message: dict) -> dict:
         """Use this API to create a draft of a new message for the specific
         user ID.
 
@@ -127,14 +120,12 @@ class Mail():
         """
 
         content = self.graph_session.make_request(
-            method='get',
-            endpoint='/users/{user_id}/messages'.format(user_id=user_id),
-            json=message
+            method="get", endpoint=f"/users/{user_id}/messages", json=message
         )
 
         return content
 
-    def get_my_messages(self, message_id: str) -> Dict:
+    def get_my_messages(self, message_id: str) -> dict:
         """Retrieve the properties and relationships of a message object for
         the default user.
 
@@ -152,15 +143,12 @@ class Mail():
         """
 
         content = self.graph_session.make_request(
-            method='get',
-            endpoint='/me/messages/{message_id}'.format(
-                message_id=message_id
-            )
+            method="get", endpoint=f"/me/messages/{message_id}"
         )
 
         return content
 
-    def get_user_messages(self, user_id: str, message_id: str) -> Dict:
+    def get_user_messages(self, user_id: str, message_id: str) -> dict:
         """Retrieve the properties and relationships of a message object for
         a specific user.
 
@@ -181,11 +169,7 @@ class Mail():
         """
 
         content = self.graph_session.make_request(
-            method='get',
-            endpoint='/users/{user_id}/messages/{message_id}'.format(
-                user_id=user_id,
-                message_id=message_id
-            )
+            method="get", endpoint=f"/users/{user_id}/messages/{message_id}"
         )
 
         return content
@@ -208,14 +192,12 @@ class Mail():
         """
 
         content = self.graph_session.make_request(
-            method='patch',
-            endpoint='/me/messages',
-            json=message
+            method="patch", endpoint="/me/messages", json=message
         )
 
         return content
 
-    def update_user_message(self, user_id: str, message: dict) -> Dict:
+    def update_user_message(self, user_id: str, message: dict) -> dict:
         """Update the properties of a message object for the
         specified user.
 
@@ -236,15 +218,13 @@ class Mail():
         """
 
         content = self.graph_session.make_request(
-            method='patch',
-            endpoint='/users/{user_id}/messages'.format(user_id=user_id),
-            json=message
+            method="patch", endpoint=f"/users/{user_id}/messages", json=message
         )
 
         return content
 
     def delete_my_message(self, message_id: str) -> dict:
-        """Delete a message in the default user's mailbox,
+        """Delete a message in the default user"s mailbox,
         or delete a relationship of the message.
 
         ### Parameters
@@ -261,16 +241,13 @@ class Mail():
         """
 
         content = self.graph_session.make_request(
-            method='get',
-            endpoint='/me/messages/{message_id}'.format(
-                message_id=message_id
-            )
+            method="get", endpoint=f"me/messages/{message_id}"
         )
 
         return content
 
-    def delete_user_message(self, user_id: str, message_id: str) -> Dict:
-        """Delete a message in the specified user's mailbox,
+    def delete_user_message(self, user_id: str, message_id: str) -> dict:
+        """Delete a message in the specified user"s mailbox,
         or delete a relationship of the message.
 
         ### Parameters
@@ -290,11 +267,7 @@ class Mail():
         """
 
         content = self.graph_session.make_request(
-            method='delete',
-            endpoint='/users/{user_id}/messages/{message_id}'.format(
-                user_id=user_id,
-                message_id=message_id
-            )
+            method="delete", endpoint=f"/users/{user_id}/messages/{message_id}"
         )
 
         return content
@@ -322,15 +295,12 @@ class Mail():
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/me/messages/{message_id}/send'.format(
-                message_id=message_id
-            )
+            method="post", endpoint=f"/me/messages/{message_id}/send"
         )
 
         return content
 
-    def send_user_message(self, user_id: str, message_id: str) -> Dict:
+    def send_user_message(self, user_id: str, message_id: str) -> dict:
         """Send a message in the draft folder for the specified user.
 
         ### Overview:
@@ -356,11 +326,7 @@ class Mail():
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/users/{user_id}/messages/{message_id}/send'.format(
-                user_id=user_id,
-                message_id=message_id
-            )
+            method="post", endpoint=f"/users/{user_id}/messages/{message_id}/send"
         )
 
         return content
@@ -381,22 +347,19 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 202 Accepted
             response code. It does not return anything in
             the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/me/messages/{message_id}/copy'.format(
-                message_id=message_id
-            )
+            method="post", endpoint=f"/me/messages/{message_id}/copy"
         )
 
         return content
 
-    def copy_user_message(self, user_id: str, message_id: str) -> Dict:
+    def copy_user_message(self, user_id: str, message_id: str) -> dict:
         """Send a message in the draft folder for the specified user.
 
         ### Overview:
@@ -415,23 +378,19 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 202 Accepted
             response code. It does not return anything in
             the response body.
         """
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/users/{user_id}/messages/{message_id}/copy'.format(
-                user_id=user_id,
-                message_id=message_id
-            )
+            method="post", endpoint=f"/users/{user_id}/messages/{message_id}/copy"
         )
 
         return content
 
     def move_my_message(self, message_id: str, destination_id: str) -> dict:
-        """Move a message to another folder within the specified user's mailbox.
+        """Move a message to another folder within the specified user"s mailbox.
         For the default user.
 
         ### Overview:
@@ -449,23 +408,23 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 201 Created response
             code and `Message` object in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/me/messages/{message_id}/move'.format(
-                message_id=message_id
-            ),
-            json={"destinationId": destination_id}
+            method="post",
+            endpoint=f"/me/messages/{message_id}/move",
+            json={"destinationId": destination_id},
         )
 
         return content
 
-    def move_user_message(self, user_id: str, message_id: str, destination_id: str) -> Dict:
-        """Move a message to another folder within the specified user's mailbox.
+    def move_user_message(
+        self, user_id: str, message_id: str, destination_id: str
+    ) -> dict:
+        """Move a message to another folder within the specified user"s mailbox.
 
         ### Overview:
         ----
@@ -486,18 +445,15 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 201 Created response
             code and `Message` object in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/users/{user_id}/messages/{message_id}/move'.format(
-                user_id=user_id,
-                message_id=message_id
-            ),
-            json={"destinationId": destination_id}
+            method="post",
+            endpoint=f"/users/{user_id}/messages/{message_id}/move",
+            json={"destinationId": destination_id},
         )
 
         return content
@@ -520,20 +476,17 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 201 Created response
             code and `Message` object in the response body.
         """
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/me/messages/{message_id}/createReply'.format(
-                message_id=message_id
-            )
+            method="post", endpoint=f"/me/messages/{message_id}/createReply"
         )
 
         return content
 
-    def create_reply_user_message(self, user_id: str, message_id: str) -> Dict:
+    def create_reply_user_message(self, user_id: str, message_id: str) -> dict:
         """Create a draft of the reply to the specified message.
 
         ### Overview:
@@ -554,17 +507,14 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 201 Created response
             code and `Message` object in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/users/{user_id}/messages/{message_id}/createReply'.format(
-                user_id=user_id,
-                message_id=message_id
-            )
+            method="post",
+            endpoint=f"/users/{user_id}/messages/{message_id}/createReply",
         )
 
         return content
@@ -584,22 +534,20 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 202 Accepted response
             code. It does not return anything in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/me/messages/{message_id}/reply'.format(
-                message_id=message_id
-            ),
-            json=message
+            method="post", endpoint=f"/me/messages/{message_id}/reply", json=message
         )
 
         return content
 
-    def reply_to_user_message(self, user_id: str, message_id: str, message: dict) -> Dict:
+    def reply_to_user_message(
+        self, user_id: str, message_id: str, message: dict
+    ) -> dict:
         """Reply to the sender of a message, add a comment or modify any updateable properties
         all in one reply call. The message is then saved in the Sent Items folder.
 
@@ -618,18 +566,15 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 202 Accepted response
             code. It does not return anything in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/users/{user_id}/messages/{message_id}/reply'.format(
-                user_id=user_id,
-                message_id=message_id
-            ),
-            json=message
+            method="post",
+            endpoint=f"/users/{user_id}/messages/{message_id}/reply",
+            json=message,
         )
 
         return content
@@ -651,21 +596,18 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 201 Created response
             code and `Message` object in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/me/messages/{message_id}/createReplyAll'.format(
-                message_id=message_id
-            )
+            method="post", endpoint=f"/me/messages/{message_id}/createReplyAll"
         )
 
         return content
 
-    def create_reply_all_user_message(self, user_id: str, message_id: str) -> Dict:
+    def create_reply_all_user_message(self, user_id: str, message_id: str) -> dict:
         """Create a draft to reply to the sender and all the recipients of the specified message.
 
         ### Overview:
@@ -687,17 +629,14 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 201 Created response
             code and `Message` object in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/users/{user_id}/messages/{message_id}/createReplyAll'.format(
-                user_id=user_id,
-                message_id=message_id
-            )
+            method="post",
+            endpoint=f"/users/{user_id}/messages/{message_id}/createReplyAll",
         )
 
         return content
@@ -722,22 +661,20 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 201 Created response
             code and `Message` object in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/me/messages/{message_id}/replyAll'.format(
-                message_id=message_id
-            ),
-            json=message
+            method="post", endpoint=f"/me/messages/{message_id}/replyAll", json=message
         )
 
         return content
 
-    def reply_all_user_message(self, user_id: str, message_id: str, message: dict) -> Dict:
+    def reply_all_user_message(
+        self, user_id: str, message_id: str, message: dict
+    ) -> dict:
         """Create a draft to reply to the sender and all the recipients of the specified message.
 
         ### Overview:
@@ -759,18 +696,15 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 201 Created response
             code and `Message` object in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/users/{user_id}/messages/{message_id}/replyAll'.format(
-                user_id=user_id,
-                message_id=message_id
-            ),
-            json=message
+            method="post",
+            endpoint=f"/users/{user_id}/messages/{message_id}/replyAll",
+            json=message,
         )
 
         return content
@@ -791,21 +725,18 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 201 Created response
             code and `Message` object in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/me/messages/{message_id}/createForward'.format(
-                message_id=message_id
-            )
+            method="post", endpoint=f"/me/messages/{message_id}/createForward"
         )
 
         return content
 
-    def create_forward_user_message(self, user_id: str, message_id: str) -> Dict:
+    def create_forward_user_message(self, user_id: str, message_id: str) -> dict:
         """Create a draft to forward the specified message.
 
         ### Overview:
@@ -825,17 +756,14 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 201 Created response
             code and Message object in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/users/{user_id}/messages/{message_id}/createForward'.format(
-                user_id=user_id,
-                message_id=message_id
-            )
+            method="post",
+            endpoint=f"/users/{user_id}/messages/{message_id}/createForward",
         )
 
         return content
@@ -854,22 +782,20 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 202 Accepted response code.
             It does not return anything in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/me/messages/{message_id}/forward'.format(
-                message_id=message_id
-            ),
-            json=message
+            method="post", endpoint=f"/me/messages/{message_id}/forward", json=message
         )
 
         return content
 
-    def forward_user_message(self, user_id: str, message_id: str, message: dict) -> Dict:
+    def forward_user_message(
+        self, user_id: str, message_id: str, message: dict
+    ) -> dict:
         """Forward a message. The message is saved in the Sent Items folder.
 
         ### Parameters
@@ -886,23 +812,22 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 202 Accepted response code.
             It does not return anything in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/users/{user_id}/messages/{message_id}/forward'.format(
-                user_id=user_id,
-                message_id=message_id
-            ),
-            json=message
+            method="post",
+            endpoint=f"/users/{user_id}/messages/{message_id}/forward",
+            json=message,
         )
 
         return content
 
-    def send_my_mail(self, message_id: str, message: dict, save_to_send_items: bool = True) -> dict:
+    def send_my_mail(
+        self, message_id: str, message: dict, save_to_send_items: bool = True
+    ) -> dict:
         """Send the message specified in the request body for the default user.
 
         ### Overview:
@@ -921,22 +846,22 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 202 Accepted response code.
             It does not return anything in the response body.
         """
 
-        message['saveToSentItems'] = save_to_send_items
+        message["saveToSentItems"] = save_to_send_items
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/me/sendMail',
-            json=message
+            method="post", endpoint="/me/sendMail", json=message
         )
 
         return content
 
-    def send_user_mail(self, user_id: str, message: dict, save_to_send_items: bool = True) -> Dict:
+    def send_user_mail(
+        self, user_id: str, message: dict, save_to_send_items: bool = True
+    ) -> dict:
         """Send the message specified in the request body.
 
         ### Overview:
@@ -959,19 +884,15 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 202 Accepted response code.
             It does not return anything in the response body.
         """
 
-        message['saveToSentItems'] = save_to_send_items
+        message["saveToSentItems"] = save_to_send_items
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/users/{user_id}/sendMail'.format(
-                user_id=user_id
-            ),
-            json=message
+            method="post", endpoint=f"/users/{user_id}/sendMail", json=message
         )
 
         return content
@@ -987,60 +908,52 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns a 200 OK response code
             and collection of Attachment objects in the response body.
         """
         content = self.graph_session.make_request(
-            method='get',
-            endpoint='/me/messages/{message_id}/attachments'.format(
-                message_id=message_id
-            )
+            method="get", endpoint=f"/me/messages/{message_id}/attachments"
         )
 
         return content
 
-    def list_user_attachements(self, user_id: str, message_id: str) -> Dict:
-        """Get all the `messageRule` objects defined for the user's Inbox. For
+    def list_user_attachements(self, user_id: str, message_id: str) -> dict:
+        """Get all the `messageRule` objects defined for the user"s Inbox. For
         the default user.
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns a 200 OK response code
             and collection of messageRule objects in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='get',
-            endpoint='/users/{user_id}/messages/{message_id}/attachments'.format(
-                user_id=user_id,
-                message_id=message_id
-            )
+            method="get", endpoint=f"/users/{user_id}/messages/{message_id}/attachments"
         )
 
         return content
 
-    def list_my_rules(self) -> Dict:
-        """Get all the `messageRule` objects defined for the user's Inbox. For
+    def list_my_rules(self) -> dict:
+        """Get all the `messageRule` objects defined for the user"s Inbox. For
         the default user.
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns a 200 OK response code
             and collection of messageRule objects in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='get',
-            endpoint='/me/mailFolders/inbox/messageRules'
+            method="get", endpoint="/me/mailFolders/inbox/messageRules"
         )
 
         return content
 
-    def list_rules(self, user_id: str) -> Dict:
-        """Get all the `messageRule` objects defined for the user's Inbox. For
+    def list_rules(self, user_id: str) -> dict:
+        """Get all the `messageRule` objects defined for the user"s Inbox. For
         the specific user.
 
         ### Parameters
@@ -1050,46 +963,42 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns a 200 OK response code
             and collection of messageRule objects in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='get',
-            endpoint='/users/{user_id}/mailFolders/inbox/messageRules'.format(
-                user_id=user_id
-            )
+            method="get", endpoint=f"/users/{user_id}/mailFolders/inbox/messageRules"
         )
 
         return content
 
-    def create_my_message_rule(self, rule: Dict) -> Dict:
+    def create_my_message_rule(self, rule: dict) -> dict:
         """Create a messageRule object by specifying a set of conditions and actions for
         the default user.
 
         ### Parameters
         ----
-        rule : Dict
-            The parameters that are applicable to your rule. For
-            more info: https://docs.microsoft.com/en-us/graph/api/mailfolder-post-messagerules?view=graph-rest-1.0&tabs=http#request-body
+        rule : dict
+            The parameters that are applicable to your rule.
+            For more info:
+            https://docs.microsoft.com/en-us/graph/api/mailfolder-post-messagerules?view=graph-rest-1.0&tabs=http#request-body
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 201 Created response code and a
             `messageRule` object in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/me/mailFolders/inbox/messageRules',
-            json=rule
+            method="post", endpoint="/me/mailFolders/inbox/messageRules", json=rule
         )
 
         return content
 
-    def create_message_rule(self, user_id: str, rule: Dict) -> Dict:
+    def create_message_rule(self, user_id: str, rule: dict) -> dict:
         """Create a messageRule object by specifying a set of conditions and actions
         for the specified User.
 
@@ -1099,48 +1008,46 @@ class Mail():
             The User ID for which to create the message rule
             for.
 
-        rule : Dict
-            The parameters that are applicable to your rule. For
-            more info: https://docs.microsoft.com/en-us/graph/api/mailfolder-post-messagerules?view=graph-rest-1.0&tabs=http#request-body
+        rule : dict
+            The parameters that are applicable to your rule.
+            For more info:
+            https://docs.microsoft.com/en-us/graph/api/mailfolder-post-messagerules?view=graph-rest-1.0&tabs=http#request-body
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns 201 Created response code and a
             `messageRule` object in the response body.
         """
 
         content = self.graph_session.make_request(
-            method='post',
-            endpoint='/users/{user_id}/mailFolders/inbox/messageRules'.format(
-                user_id=user_id
-            ),
-            json=rule
+            method="post",
+            endpoint=f"/users/{user_id}/mailFolders/inbox/messageRules",
+            json=rule,
         )
 
         return content
 
-    def list_my_overrides(self) -> Dict:
+    def list_my_overrides(self) -> dict:
         """Get the overrides that a user has set up to always classify messages from
         certain senders in specific ways.
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns a 200 OK response code and a collection
             of `inferenceClassificationOverride1 objects in the response body. An
-            empty collection is returned if the user doesn't have any overrides
+            empty collection is returned if the user doesn"t have any overrides
             set up.
         """
 
         content = self.graph_session.make_request(
-            method='get',
-            endpoint='/me/inferenceClassification/overrides'
+            method="get", endpoint="/me/inferenceClassification/overrides"
         )
 
         return content
 
-    def list_overrides(self, user_id: str) -> Dict:
+    def list_overrides(self, user_id: str) -> dict:
         """Get the overrides that a user has set up to always classify messages from
         certain senders in specific ways.
 
@@ -1152,18 +1059,15 @@ class Mail():
 
         ### Returns
         ----
-        Dict
+        dict
             If successful, this method returns a 200 OK response code and a collection
             of `inferenceClassificationOverride` objects in the response body. An
-            empty collection is returned if the user doesn't have any overrides
+            empty collection is returned if the user doesn"t have any overrides
             set up.
         """
 
         content = self.graph_session.make_request(
-            method='get',
-            endpoint='/users/{user_id}/inferenceClassification/overrides'.format(
-                user_id=user_id
-            )
+            method="get", endpoint=f"/users/{user_id}/inferenceClassification/overrides"
         )
 
         return content

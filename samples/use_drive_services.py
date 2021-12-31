@@ -17,7 +17,7 @@ scopes = [
 config = ConfigParser()
 
 # Read the file.
-config.read('configs/config.ini')
+config.read('config/config.ini')
 
 # Get the specified credentials.
 client_id = config.get('graph_api', 'client_id')
@@ -30,7 +30,7 @@ graph_client = MicrosoftGraphClient(
     client_secret=client_secret,
     redirect_uri=redirect_uri,
     scope=scopes,
-    credentials='configs/ms_graph_state.jsonc'
+    credentials='config/ms_graph_state.jsonc'
 )
 
 # Login to the Client.

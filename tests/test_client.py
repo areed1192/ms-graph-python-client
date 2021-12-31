@@ -2,16 +2,16 @@ import unittest
 
 from unittest import TestCase
 from configparser import ConfigParser
-from msgraph.client import MicrosoftGraphClient
+from ms_graph.client import MicrosoftGraphClient
 
-from msgraph.mail import Mail
-from msgraph.notes import Notes
-from msgraph.users import Users
-from msgraph.search import Search
-from msgraph.drives import Drives
-from msgraph.groups import Groups
-from msgraph.drive_items import DriveItems
-from msgraph.personal_contacts import PersonalContacts
+from ms_graph.mail import Mail
+from ms_graph.notes import Notes
+from ms_graph.users import Users
+from ms_graph.search import Search
+from ms_graph.drives import Drives
+from ms_graph.groups import Groups
+from ms_graph.drive_items import DriveItems
+from ms_graph.personal_contacts import PersonalContacts
 
 
 class MicrosoftGraphSessionTest(TestCase):

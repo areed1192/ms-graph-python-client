@@ -1,4 +1,3 @@
-from typing import Dict
 from ms_graph.session import GraphSession
 
 
@@ -27,14 +26,14 @@ class Notes():
         self.graph_session: GraphSession = session
 
         # Set the endpoint.
-        self.endpoint = 'onenote'
+        self.endpoint = "onenote"
 
-    def list_my_notebooks(self) -> Dict:
+    def list_my_notebooks(self) -> dict:
         """Retrieve a list of your notebook objects.
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `Notebook` Resource Object.
         """
 
@@ -42,38 +41,37 @@ class Notes():
         endpoint = "me/" + self.endpoint + "/notebooks"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def list_user_notebooks(self, user_id: str) -> Dict:
+    def list_user_notebooks(self, user_id: str) -> dict:
         """Retrieve a list of notebook objects.
 
         ### Parameters
         ----
-        user_id (str): The User's ID that is assoicated with
+        user_id (str): The User"s ID that is assoicated with
         their Graph account.
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `Notebook` Resource Object.
         """
 
         # Define the endpoint.
-        endpoint = "users/{user_id}".format(user_id=user_id) + \
-            self.endpoint + "/notebooks"
+        endpoint =f"users/{user_id}" + self.endpoint + "/notebooks"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def list_group_notebooks(self, group_id: str) -> Dict:
+    def list_group_notebooks(self, group_id: str) -> dict:
         """Retrieve a list of notebook objects.
 
         ### Parameters
@@ -83,22 +81,21 @@ class Notes():
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `Notebook` Resource Object.
         """
 
         # Define the endpoint.
-        endpoint = "groups/{group_id}".format(
-            group_id=group_id) + self.endpoint + "/notebooks"
+        endpoint = f"groups/{group_id}" + self.endpoint + "/notebooks"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def list_site_notebooks(self, site_id: str) -> Dict:
+    def list_site_notebooks(self, site_id: str) -> dict:
         """Retrieve a list of notebook objects.
 
         ### Parameters
@@ -108,53 +105,50 @@ class Notes():
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `Notebook` Resource Object.
         """
 
         # Define the endpoint.
-        endpoint = "sites/{site_id}".format(site_id=site_id) + \
-            self.endpoint + "/notebooks"
+        endpoint = f"sites/{site_id}" + self.endpoint + "/notebooks"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def get_my_notebook(self, notebook_id: str) -> Dict:
+    def get_my_notebook(self, notebook_id: str) -> dict:
         """Retrieve a list of notebook objects.
 
         ### Parameters
         ----
-        notebook_id (str): The User's Notebook ID that you
+        notebook_id (str): The User"s Notebook ID that you
         want to pull.
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `Notebook` Resource Object.
         """
 
         # define the endpoints.
-        endpoint = "me/" + self.endpoint + "/notebooks/{notebook_id}".format(
-            notebook_id=notebook_id
-        )
+        endpoint = "me/" + self.endpoint + f"/notebooks/{notebook_id}"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def get_user_notebook(self, user_id: str, notebook_id: str) -> Dict:
-        """Retrieve a notebook object from a user by it's ID.
+    def get_user_notebook(self, user_id: str, notebook_id: str) -> dict:
+        """Retrieve a notebook object from a user by it"s ID.
 
         ### Parameters
         ----
-        user_id (str): The User's ID that is assoicated with
+        user_id (str): The User"s ID that is assoicated with
         their Graph account.
 
         notebook_id (str): The Notebook ID that you
@@ -162,24 +156,22 @@ class Notes():
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `Notebook` Resource Object.
         """
 
         # Define the endpoint.
-        endpoint = "users/{user_id}".format(user_id=user_id) + self.endpoint + "/notebooks/{notebook_id}".format(
-            notebook_id=notebook_id
-        )
+        endpoint = f"users/{user_id}" + self.endpoint + f"/notebooks/{notebook_id}"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def get_group_notebook(self, group_id: str, notebook_id: str) -> Dict:
-        """Retrieve a notebook object from a Group by it's ID.
+    def get_group_notebook(self, group_id: str, notebook_id: str) -> dict:
+        """Retrieve a notebook object from a Group by it"s ID.
 
         ### Parameters
         ----
@@ -191,24 +183,22 @@ class Notes():
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `Notebook` Resource Object.
         """
 
         # Define the endpoint.
-        endpoint = "groups/{group_id}".format(group_id=group_id) + self.endpoint + "/notebooks/{notebook_id}".format(
-            notebook_id=notebook_id
-        )
+        endpoint = f"groups/{group_id}" + self.endpoint + f"/notebooks/{notebook_id}"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def get_site_notebook(self, site_id: str, notebook_id: str) -> Dict:
-        """Retrieve a notebook object from a SharePoint Site by it's ID.
+    def get_site_notebook(self, site_id: str, notebook_id: str) -> dict:
+        """Retrieve a notebook object from a SharePoint Site by it"s ID.
 
         ### Parameters
         ----
@@ -220,23 +210,21 @@ class Notes():
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `Notebook` Resource Object.
         """
 
         # Define the endpoint.
-        endpoint = "sites/{site_id}".format(site_id=site_id) + self.endpoint + "/notebooks/{notebook_id}".format(
-            notebook_id=notebook_id
-        )
+        endpoint = f"sites/{site_id}" + self.endpoint + f"/notebooks/{notebook_id}"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def list_my_notebook_sections(self, notebook_id: str) -> Dict:
+    def list_my_notebook_sections(self, notebook_id: str) -> dict:
         """Retrieve a list of onenoteSection objects from one of your notebooks.
 
         ### Parameters
@@ -246,23 +234,21 @@ class Notes():
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `Notebook` Resource Object.
         """
 
         # Define the endpoint.
-        endpoint = endpoint = "me/" + self.endpoint + "/notebooks/{notebook_id}".format(
-            notebook_id=notebook_id
-        ) + "/sections"
+        endpoint = endpoint = "me/" + self.endpoint + f"/notebooks/{notebook_id}/sections"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
         return content
 
-    def list_my_notebook_pages(self, section_id: str) -> Dict:
+    def list_my_notebook_pages(self, section_id: str) -> dict:
         """Retrieve a list of onenoteSection objects from one of your notebooks.
 
         ### Parameters
@@ -275,17 +261,15 @@ class Notes():
 
         ### Returns
         ----
-        Dict:
+        dict:
             A List of `Notebook` Resource Object.
         """
 
         # Define the endpoint.
-        endpoint = endpoint = "me/{endpoint}/".format(endpoint=self.endpoint) + "/sections/{section_id}".format(
-            section_id=section_id
-        )
+        endpoint = endpoint = f"me/{self.endpoint}/" + f"/sections/{section_id}"
 
         content = self.graph_session.make_request(
-            method='get',
+            method="get",
             endpoint=endpoint
         )
 
