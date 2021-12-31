@@ -33,7 +33,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A Drive Resource Object.
         """
 
@@ -49,7 +49,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of Drive Resource Object.
         """
 
@@ -65,7 +65,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of Drive Resource Object.
         """
 
@@ -81,7 +81,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of DriveItem Resource Object.
         """
 
@@ -102,7 +102,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of DriveItem Resource Objects.
         """
 
@@ -119,7 +119,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of DriveItem Resource Objects.
         """
 
@@ -147,7 +147,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of DriveItem Resource Objects.
         """
 
@@ -164,7 +164,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of DriveItem Resource Objects.
         """
 
@@ -180,7 +180,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A Drive Resource Object.
         """
 
@@ -196,7 +196,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A Drive Resource Object.
         """
 
@@ -212,7 +212,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of DriveChildren Resource Objects.
         """
 
@@ -228,7 +228,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of Drive Resource Objects.
         """
 
@@ -244,7 +244,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A Drive Resource Object.
         """
 
@@ -260,7 +260,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of DriveChildren Resource Objects.
         """
 
@@ -276,7 +276,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of Drive Resource Objects.
         """
 
@@ -292,7 +292,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A Drive Resource Object.
         """
 
@@ -308,7 +308,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of DriveChildren Resource Objects.
         """
 
@@ -324,7 +324,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of Drive Resource Objects.
         """
 
@@ -340,7 +340,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A Drive Resource Object.
         """
 
@@ -356,7 +356,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of DriveChildren Resource Objects.
         """
 
@@ -372,7 +372,7 @@ class Drives():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of Drive Resource Objects.
         """
 

@@ -306,7 +306,7 @@ class MicrosoftGraphClient:
 
         ### Returns:
         ----
-        Dict: A dictionary containing a new access token and refresh token.
+        dict : A dictionary containing a new access token and refresh token.
         """
 
         # Parse the Code.
@@ -330,7 +330,7 @@ class MicrosoftGraphClient:
 
         ### Returns
         ----
-        Dict:
+        dict :
             A token dictionary with a new access token.
         """
 

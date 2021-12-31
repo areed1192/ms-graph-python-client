@@ -58,7 +58,7 @@ class GraphSession():
 
         ### Returns
         ----
-        Dict:
+        dict :
             A dictionary containing all the components.
         """
 

@@ -32,7 +32,7 @@ class Search():
 
         ### Returns
         ----
-        dict:
+        dict :
             A `SearchResponse` collection.
         """
 

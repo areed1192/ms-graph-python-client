@@ -32,7 +32,7 @@ class PersonalContacts():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `Contact` Resource Object.
         """
 
@@ -51,7 +51,7 @@ class PersonalContacts():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `ContactFolders` Resource Object.
         """
 
@@ -78,7 +78,7 @@ class PersonalContacts():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `ContactFolders` Resource Object.
         """
 
@@ -104,7 +104,7 @@ class PersonalContacts():
 
         ### Returns
         ----
-        dict:
+        dict :
             A `ContactFolder` Resource Object.
         """
 
@@ -134,7 +134,7 @@ class PersonalContacts():
 
         ### Returns
         ----
-        dict:
+        dict :
             A `ContactFolder` Resource Object.
         """
 
@@ -159,7 +159,7 @@ class PersonalContacts():
 
         ### Returns
         ----
-        dict:
+        dict :
             A `ContactFolder` Resource Object.
         """
 
@@ -187,7 +187,7 @@ class PersonalContacts():
 
         ### Returns
         ----
-        dict:
+        dict :
             A `ContactFolder` Resource Object.
         """
 
@@ -211,7 +211,7 @@ class PersonalContacts():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `Contact` Resource Object.
         """
 

@@ -42,7 +42,7 @@ class DriveItems():
 
         ### Returns
         ----
-        dict:
+        dict :
             A DriveItem resource object.
         """
 
@@ -66,7 +66,7 @@ class DriveItems():
 
         ### Returns
         ----
-        dict:
+        dict :
             A DriveItem resource object.
         """
 
@@ -91,7 +91,7 @@ class DriveItems():
 
         ### Returns
         ----
-        dict:
+        dict :
             A DriveItem resource object.
         """
 
@@ -115,7 +115,7 @@ class DriveItems():
 
         ### Returns
         ----
-        dict:
+        dict :
             A DriveItem resource object.
         """
 
@@ -137,7 +137,7 @@ class DriveItems():
 
         ### Returns
         ----
-        dict:
+        dict :
             A DriveItem resource object.
         """
 
@@ -158,7 +158,7 @@ class DriveItems():
 
         ### Returns
         ----
-        dict:
+        dict :
             A DriveItem resource object.
         """
 
@@ -183,7 +183,7 @@ class DriveItems():
 
         ### Returns
         ----
-        dict:
+        dict :
             A DriveItem resource object.
         """
 
@@ -207,7 +207,7 @@ class DriveItems():
 
         ### Returns
         ----
-        dict:
+        dict :
             A DriveItem resource object.
         """
 
@@ -235,7 +235,7 @@ class DriveItems():
 
         ### Returns
         ----
-        dict:
+        dict :
             A DriveItem resource object.
         """
 
@@ -260,7 +260,7 @@ class DriveItems():
 
         ### Returns
         ----
-        dict:
+        dict :
             A DriveItem resource object.
         """
 
@@ -284,7 +284,7 @@ class DriveItems():
 
         ### Returns
         ----
-        dict:
+        dict :
             A DriveItem resource object.
         """
 

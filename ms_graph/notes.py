@@ -33,7 +33,7 @@ class Notes():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `Notebook` Resource Object.
         """
 
@@ -57,7 +57,7 @@ class Notes():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `Notebook` Resource Object.
         """
 
@@ -81,7 +81,7 @@ class Notes():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `Notebook` Resource Object.
         """
 
@@ -105,7 +105,7 @@ class Notes():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `Notebook` Resource Object.
         """
 
@@ -129,7 +129,7 @@ class Notes():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `Notebook` Resource Object.
         """
 
@@ -156,7 +156,7 @@ class Notes():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `Notebook` Resource Object.
         """
 
@@ -183,7 +183,7 @@ class Notes():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `Notebook` Resource Object.
         """
 
@@ -210,7 +210,7 @@ class Notes():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `Notebook` Resource Object.
         """
 
@@ -234,7 +234,7 @@ class Notes():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `Notebook` Resource Object.
         """
 
@@ -261,7 +261,7 @@ class Notes():
 
         ### Returns
         ----
-        dict:
+        dict :
             A List of `Notebook` Resource Object.
         """
 
