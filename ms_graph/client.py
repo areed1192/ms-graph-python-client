@@ -21,7 +21,7 @@ from ms_graph.personal_contacts import PersonalContacts
 from ms_graph.mail import Mail
 
 from ms_graph.workbooks_and_charts.workbook import Workbooks
-
+from ms_graph.workbooks_and_charts.range import Range
 
 class MicrosoftGraphClient:
 
@@ -477,3 +477,17 @@ class MicrosoftGraphClient:
         workbook_service: Workbooks = Workbooks(session=self.graph_session)
 
         return workbook_service
+
+    def range(self) -> Range:
+        """Used to access the Range Services and metadata.
+
+        ### Returns
+        ---
+        Range:
+            The `Range` services Object.
+        """
+
+        # Grab the `Range` Object for the session.
+        range_service: Range = Range(session=self.graph_session)
+
+        return range_service

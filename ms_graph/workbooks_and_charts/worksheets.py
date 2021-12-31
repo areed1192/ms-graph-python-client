@@ -364,3 +364,273 @@ class Worksheet:
             )
 
         return content
+
+    def get_range(
+        self,
+        worksheet_id_or_name: str,
+        address: str = None,
+        item_id: str = None,
+        item_path: str = None,
+    ) -> dict:
+        """Gets the range object specified by the address or name.
+
+        ### Parameters
+        ----
+        worksheet_id_or_name : str
+            The worksheet resource id or the worksheet name.
+
+        address : str (optional, Default=None)
+            The address or the name of the range. If not specified,
+            the entire worksheet range is returned.
+
+        item_id : str (optional, Default=None)
+            The Drive Item Resource ID.
+
+        item_path : str (optional, Default=None)
+            The Item Path. An Example would be the following:
+            `/TestFolder/TestFile.txt`
+
+        ### Returns
+        ----
+        dict:
+            A Range object.
+        """
+
+        if address:
+            endpoint = r"/range(address={address})"
+        else:
+            endpoint = "/range"
+
+        if item_id:
+            content = self.graph_session.make_request(
+                method="get",
+                endpoint=f"/me/drive/items/{item_id}/workbook/worksheets"
+                + f"/{worksheet_id_or_name}"
+                + endpoint,
+            )
+        elif item_path:
+            content = self.graph_session.make_request(
+                method="get",
+                endpoint=f"/me/drive/root:/{item_path}:/workbook/worksheets/"
+                + f"{worksheet_id_or_name}"
+                + endpoint,
+            )
+
+        return content
+
+    def list_tables(
+        self,
+        worksheet_id_or_name: str,
+        item_id: str = None,
+        item_path: str = None,
+    ) -> dict:
+        """Retrieve a list of WorkbookTable objects.
+
+        ### Parameters
+        ----
+        worksheet_id_or_name : str
+            The worksheet resource id or the worksheet name.
+
+        item_id : str (optional, Default=None)
+            The Drive Item Resource ID.
+
+        item_path : str (optional, Default=None)
+            The Item Path. An Example would be the following:
+            `/TestFolder/TestFile.txt`
+
+        ### Returns
+        ----
+        dict:
+            A collection of WorkbookTable Objects.
+        """
+
+        if item_id:
+            content = self.graph_session.make_request(
+                method="get",
+                endpoint=f"/me/drive/items/{item_id}/workbook/worksheets"
+                + f"/{worksheet_id_or_name}/tables",
+            )
+        elif item_path:
+            content = self.graph_session.make_request(
+                method="get",
+                endpoint=f"/me/drive/root:/{item_path}:/workbook/worksheets/"
+                + f"{worksheet_id_or_name}/tables",
+            )
+
+        return content
+
+    def add_table(
+        self,
+        worksheet_id_or_name: str,
+        address: str,
+        has_headers: bool,
+        item_id: str = None,
+        item_path: str = None,
+    ) -> dict:
+        """Creates a new WorkbookTable Object.
+
+        ### Parameters
+        ----
+        worksheet_id_or_name : str
+            The worksheet resource id or the worksheet name.
+
+        address : str
+            The range address.
+
+        has_headers : bool
+            Boolean value that indicates whether the range has
+            column labels. If the source does not contain headers
+            (i.e,. when this property set to false), Excel will
+            automatically generate header shifting the data down
+            by one row.
+
+        item_id : str (optional, Default=None)
+            The Drive Item Resource ID.
+
+        item_path : str (optional, Default=None)
+            The Item Path. An Example would be the following:
+            `/TestFolder/TestFile.txt`
+
+        ### Returns
+        ----
+        dict:
+            A WorkbookTable Object.
+        """
+
+        body = {"address": address, "hasHeaders": has_headers}
+
+        if item_id:
+            content = self.graph_session.make_request(
+                method="post",
+                json=body,
+                additional_headers={"Content-type": "application/json"},
+                endpoint=f"/me/drive/items/{item_id}/workbook/worksheets"
+                + f"/{worksheet_id_or_name}/tables/add",
+            )
+        elif item_path:
+            content = self.graph_session.make_request(
+                method="post",
+                json=body,
+                additional_headers={"Content-type": "application/json"},
+                endpoint=f"/me/drive/root:/{item_path}:/workbook/worksheets/"
+                + f"{worksheet_id_or_name}/tables/add",
+            )
+
+        return content
+
+    def list_charts(
+        self,
+        worksheet_id_or_name: str,
+        item_id: str = None,
+        item_path: str = None,
+    ) -> dict:
+        """Retrieve a list of WorkbookChart Objects.
+
+        ### Parameters
+        ----
+        worksheet_id_or_name : str
+            The worksheet resource id or the worksheet name.
+
+        item_id : str (optional, Default=None)
+            The Drive Item Resource ID.
+
+        item_path : str (optional, Default=None)
+            The Item Path. An Example would be the following:
+            `/TestFolder/TestFile.txt`
+
+        ### Returns
+        ----
+        dict:
+            A collection of WorkbookChart Objects.
+        """
+
+        if item_id:
+            content = self.graph_session.make_request(
+                method="get",
+                endpoint=f"/me/drive/items/{item_id}/workbook/worksheets"
+                + f"/{worksheet_id_or_name}/charts",
+            )
+        elif item_path:
+            content = self.graph_session.make_request(
+                method="get",
+                endpoint=f"/me/drive/root:/{item_path}:/workbook/worksheets/"
+                + f"{worksheet_id_or_name}/charts",
+            )
+
+        return content
+
+    def add_chart(
+        self,
+        worksheet_id_or_name: str,
+        name: str,
+        height: float,
+        top: float,
+        left: float,
+        width: float,
+        item_id: str = None,
+        item_path: str = None,
+    ) -> dict:
+        """Retrieve a list of table objects.
+
+        ### Parameters
+        ----
+        worksheet_id_or_name : str
+            The worksheet resource id or the worksheet name.
+
+        height : float
+            Represents the height, in points, of the chart object.
+
+        top : float
+            Represents the distance, in points, from the top edge
+            of the object to the top of row 1 (on a worksheet) or
+            the top of the chart area (on a chart).
+
+        left : float
+            The distance, in points, from the left side of the chart
+            to the worksheet origin.
+
+        width : float
+            Represents the width, in points, of the chart object.
+
+        name : str
+            Represents the name of a chart object.
+
+        item_id : str (optional, Default=None)
+            The Drive Item Resource ID.
+
+        item_path : str (optional, Default=None)
+            The Item Path. An Example would be the following:
+            `/TestFolder/TestFile.txt`
+
+        ### Returns
+        ----
+        dict:
+            A WorkbookChart object.
+        """
+
+        body = {
+            "height": height,
+            "top": top,
+            "left": left,
+            "width": width,
+            "name": name,
+        }
+
+        if item_id:
+            content = self.graph_session.make_request(
+                method="post",
+                json=body,
+                additional_headers={"Content-type": "application/json"},
+                endpoint=f"/me/drive/items/{item_id}/workbook/worksheets"
+                + f"/{worksheet_id_or_name}/charts",
+            )
+        elif item_path:
+            content = self.graph_session.make_request(
+                method="post",
+                json=body,
+                additional_headers={"Content-type": "application/json"},
+                endpoint=f"/me/drive/root:/{item_path}:/workbook/worksheets/"
+                + f"{worksheet_id_or_name}/charts",
+            )
+
+        return content
