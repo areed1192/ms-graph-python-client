@@ -2,7 +2,7 @@ from setuptools import setup
 from setuptools import find_namespace_packages
 
 # Open the README file.
-with open(file="README.md", mode="r") as fh:
+with open(file="README.md", mode="r", encoding='utf-8') as fh:
     long_description = fh.read()
 
 setup(
@@ -17,7 +17,7 @@ setup(
     version='0.1.0',
 
     # Define descriptions.
-    description='A Python Client Application that allows users to interact with the Microsoft Graph API.',
+    description='A Python Client Application that allows interaction with the Microsoft Graph API.',
     long_description=long_description,
     long_description_content_type="text/markdown",
 
@@ -26,17 +26,17 @@ setup(
 
     # Define dependencies.
     install_requires=[
-        'requests==2.24.0',
-        'msal==1.5.0'
+        'requests',
+        'msal'
     ],
 
     # Specify folder content.
     packages=find_namespace_packages(
-        include=['ms_graph']
+        include=['ms_graph', 'ms_graph.*']
     ),
 
     # Define the python version.
-    python_requires='>3.7',
+    python_requires='>3.8',
 
     # Define our classifiers.
     classifiers=[

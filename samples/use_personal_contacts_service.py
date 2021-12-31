@@ -1,6 +1,6 @@
 from pprint import pprint
-from ms_graph.client import MicrosoftGraphClient
 from configparser import ConfigParser
+from ms_graph.client import MicrosoftGraphClient
 
 scopes = [
     'Contacts.ReadWrite',
@@ -41,10 +41,10 @@ graph_client = MicrosoftGraphClient(
 graph_client.login()
 
 # Define a valid User ID.
-user_id = '8bc640c57cda25b6'
+USER_ID = '8bc640c57cda25b6'
 
 # Define a folder ID.
-folder_id = 'AQMkADAwATZiZmYAZC1hMDI2LTE3NTgtMDACLTAwCgAuAAADpjqwNb_d' + \
+FOLDER_ID = 'AQMkADAwATZiZmYAZC1hMDI2LTE3NTgtMDACLTAwCgAuAAADpjqwNb_d' + \
             'ak68rN7703uffQEAFNKsLOjbGUuHHmYnyKdJiAAFAP8ORwAAAA=='
 
 # Grab the Personal Contacts Service.
@@ -58,16 +58,16 @@ pprint(
 # Grab a contact folder for a specific user and a specific ID.
 pprint(
     personal_contacts_service.list_contacts_folder_by_id(
-        user_id=user_id,
-        folder_id=folder_id
+        user_id=USER_ID,
+        folder_id=FOLDER_ID
     )
 )
 
 # Grab a contact folder for a specific user and a specific ID.
 pprint(
     personal_contacts_service.get_contacts_folder_by_id(
-        user_id=user_id,
-        folder_id=folder_id
+        user_id=USER_ID,
+        folder_id=FOLDER_ID
     )
 )
 
@@ -97,7 +97,7 @@ pprint(
 # Create a new contact folder under the specified user profile.
 pprint(
     personal_contacts_service.create_user_contact_folder(
-        user_id=user_id,
+        user_id=USER_ID,
         folder_resource={
             "parentFolderId": "trading-robot-contacts",
             "displayName": "Trading Robot - Contacts"

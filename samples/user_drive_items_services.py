@@ -1,6 +1,6 @@
 from pprint import pprint
-from ms_graph.client import MicrosoftGraphClient
 from configparser import ConfigParser
+from ms_graph.client import MicrosoftGraphClient
 
 scopes = [
     'Calendars.ReadWrite',
@@ -40,26 +40,26 @@ graph_client.login()
 drive_item_services = graph_client.drive_item()
 
 # Define a valid User ID.
-user_id = '8bc640c57cda25b6'
+USER_ID = '8bc640c57cda25b6'
 
 # Define a valid Drive ID.
-drive_id = '8bc640c57cda25b6'
+DRIVE_ID = '8bc640c57cda25b6'
 
 # Define a valid Drive Item ID.
-drive_item_id = '8BC640C57CDA25B6!3837'
+DRIVE_ITEM_ID = '8BC640C57CDA25B6!3837'
 
 # Grab a Drive Item, by ID.
 pprint(
     drive_item_services.get_drive_item(
-        drive_id=drive_id,
-        item_id=drive_item_id
+        drive_id=DRIVE_ID,
+        item_id=DRIVE_ITEM_ID
     )
 )
 
 # Grab a Drive Item, by path.
 pprint(
     drive_item_services.get_drive_item_by_path(
-        drive_id=drive_id,
+        drive_id=DRIVE_ID,
         item_path='/Career - Certifications & Exams'
     )
 )
@@ -67,15 +67,15 @@ pprint(
 # Grab a Drive Item, for a specific user in a specific Drive.
 pprint(
     drive_item_services.get_user_drive_item(
-        user_id=user_id,
-        item_id=drive_item_id
+        user_id=USER_ID,
+        item_id=DRIVE_ITEM_ID
     )
 )
 
 # Grab a Drive Item, by path for a specific user in a specific Drive.
 pprint(
     drive_item_services.get_user_drive_item_by_path(
-        user_id=user_id,
+        user_id=USER_ID,
         item_path='/Career - Certifications & Exams'
     )
 )
@@ -83,7 +83,7 @@ pprint(
 # Grab my Drive Item by ID.
 pprint(
     drive_item_services.get_my_drive_item(
-        item_id=drive_item_id
+        item_id=DRIVE_ITEM_ID
     )
 )
 
@@ -95,20 +95,20 @@ pprint(
 )
 
 # Define a valid Group ID.
-group_id = 'GROUP_ID_GOES_HERE'
+GROUP_ID = 'GROUP_ID_GOES_HERE'
 
 # Grab a group Drive Item by ID.
 pprint(
     drive_item_services.get_group_drive_item(
-        group_id=group_id,
-        item_id=drive_item_id
+        group_id=GROUP_ID,
+        item_id=DRIVE_ITEM_ID
     )
 )
 
 # Grab a group Drive Item, by path.
 pprint(
     drive_item_services.get_group_drive_item_by_path(
-        group_id=group_id,
+        group_id=GROUP_ID,
         item_path='/Career - Certifications & Exams'
     )
 )

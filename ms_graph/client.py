@@ -1,5 +1,4 @@
 import json
-import msal
 import time
 import urllib
 import random
@@ -8,6 +7,8 @@ import pathlib
 
 from typing import List
 from typing import Dict
+
+import msal
 
 from ms_graph.users import Users
 from ms_graph.drives import Drives
@@ -22,6 +23,13 @@ from ms_graph.mail import Mail
 
 class MicrosoftGraphClient():
 
+    """
+    ### Overview:
+    ----
+    Used as the main entry point for the Microsoft Graph
+    API Service.
+    """
+
     RESOURCE = 'https://graph.microsoft.com/'
 
     AUTHORITY_URL = 'https://login.microsoftonline.com/'
@@ -32,9 +40,16 @@ class MicrosoftGraphClient():
     OFFICE365_AUTH_ENDPOINT = '/oauth20_authorize.srf?'
     OFFICE365_TOKEN_ENDPOINT = '/oauth20_token.srf'
 
-    def __init__(self, client_id: str, client_secret: str, redirect_uri: str,
-                 scope: List[str], account_type: str = 'consumers',
-                 office365: bool = False, credentials: str = None):
+    def __init__(
+        self,
+        client_id: str,
+        client_secret: str,
+        redirect_uri: str,
+        scope: List[str],
+        account_type: str = 'consumers',
+        office365: bool = False,
+        credentials: str = None
+    ):
         """Initializes the Graph Client.
 
         ### Parameters
@@ -86,6 +101,7 @@ class MicrosoftGraphClient():
         self.office_url = self.OFFICE365_AUTHORITY_URL + self.OFFICE365_AUTH_ENDPOINT
         self.graph_url = self.AUTHORITY_URL + self.account_type + self.AUTH_ENDPOINT
         self.office365 = office365
+        self._redirect_code = None
 
         # Initialize the Credential App.
         self.client_app = msal.ConfidentialClientApplication(
@@ -121,7 +137,7 @@ class MicrosoftGraphClient():
         if does_exists and action == 'load':
 
             # Load the file.
-            with open(file=self.credentials, mode='r') as state_file:
+            with open(file=self.credentials, mode='r', encoding='utf-8') as state_file:
                 credentials = json.load(fp=state_file)
 
             # Grab the Token if it exists.
@@ -150,7 +166,7 @@ class MicrosoftGraphClient():
             self.id_token = token_dict['id_token']
             self.token_dict = token_dict
 
-            with open(file=self.credentials, mode='w+') as state_file:
+            with open(file=self.credentials, mode='w+', encoding='utf-8') as state_file:
                 json.dump(obj=token_dict, fp=state_file, indent=2)
 
     def _token_seconds(self, token_type: str = 'access_token') -> int:
@@ -249,10 +265,12 @@ class MicrosoftGraphClient():
             # Build the URL.
             url = self.authorization_url()
 
-            # aks the user to go to the URL provided, they will be prompted to authenticate themsevles.
-            print('Please go to URL provided authorize your account: {}'.format(url))
+            # aks the user to go to the URL provided, they will be prompted
+            # to authenticate themsevles.
+            print(f'Please go to URL provided authorize your account: {url}')
 
-            # ask the user to take the final URL after authentication and paste here so we can parse.
+            # ask the user to take the final URL after authentication and
+            # paste here so we can parse.
             my_response = input('Paste the full URL redirect here: ')
 
             # store the redirect URL

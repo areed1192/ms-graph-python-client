@@ -1,6 +1,6 @@
 from pprint import pprint
-from ms_graph.client import MicrosoftGraphClient
 from configparser import ConfigParser
+from ms_graph.client import MicrosoftGraphClient
 
 scopes = [
     'Calendars.ReadWrite',

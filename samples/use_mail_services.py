@@ -54,15 +54,17 @@ graph_client = MicrosoftGraphClient(
 graph_client.login()
 
 # Define a valid User ID.
-user_id = '8bc640c57cda25b6'
+USER_ID = '8bc640c57cda25b6'
 
 # Define a mail Item ID.
-mail_id = 'AQMkADAwATZiZmYAZC1hMDI2LTE3NTgtMDACLTAwCgBGAAADpjqwNb_dak68rN7703u' + \
-          'ffQcAFNKsLOjbGUuHHmYnyKdJiAAAAgEhAAAAFNKsLOjbGUuHHmYnyKdJiAAFBMTneQAAAA=='
+MAIL_ID = 'AQMkADAwATZiZmYAZC1hMDI2LTE3NTgtMDACLTAwCgBGAAADpjqwNb_dak68rN7703u' + \
+          'ffQcAFNKsLOjbGUuHHmYnyKdJiAAAAgEhAAAAFNKsLOjbGUuHHmYnyKdJiAAFBMTneQ' + \
+          'AAAA=='
 
 # Define a mail item ID with Attachments.
-mail_id_with_attachments = 'AQMkADAwATZiZmYAZC1hMDI2LTE3NTgtMDACLTAwCgBGAAADpjqwNb+' + \
-                           'dak68rN7703uffQcAFNKsLOjbGUuHHmYnyKdJiAAAAgEMAAAAFNKsLOjbGUuHHmYnyKdJiAAE9ucV+AAAAA=='
+MAIL_ID_ATTACHMENTS = 'AQMkADAwATZiZmYAZC1hMDI2LTE3NTgtMDACLTAwCgBGAAADpjqwNb+' + \
+                      'dak68rN7703uffQcAFNKsLOjbGUuHHmYnyKdJiAAAAgEMAAAAFNKsLO' + \
+                      'jbGUuHHmYnyKdJiAAE9ucV+AAAAA=='
 
 # Grab the Notes Services.
 mail_services = graph_client.mail()
@@ -75,21 +77,21 @@ pprint(
 # Grab a specific message for the default user.
 pprint(
     mail_services.get_my_messages(
-        message_id=mail_id
+        message_id=MAIL_ID
     )
 )
 
 # Get a Specific User's Message.
 pprint(
     mail_services.get_user_messages(
-        user_id=user_id,
-        message_id=mail_id
+        user_id=USER_ID,
+        message_id=MAIL_ID
     )
 )
 
 # List the rules for a specific user..
 pprint(
-    mail_services.list_rules(user_id=user_id)
+    mail_services.list_rules(user_id=USER_ID)
 )
 
 # List the rules for the default user.
@@ -99,7 +101,7 @@ pprint(
 
 # List the overrides for a specific user.
 pprint(
-    mail_services.list_overrides(user_id=user_id)
+    mail_services.list_overrides(user_id=USER_ID)
 )
 
 # List the overrides for the default user.
@@ -110,7 +112,7 @@ pprint(
 # List the attachments for a specific message.
 pprint(
     mail_services.list_my_attachements(
-        message_id=mail_id_with_attachments
+        message_id=MAIL_ID_ATTACHMENTS
     )
 )
 
