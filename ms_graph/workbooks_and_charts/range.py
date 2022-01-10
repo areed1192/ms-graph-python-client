@@ -258,6 +258,7 @@ class Range:
         }
 
         endpoint = build_endpoint(inputs=inputs)
+        endpoint = endpoint + "/insert"
 
         if isinstance(shift, Enum):
             shift = shift.value
@@ -325,6 +326,7 @@ class Range:
         }
 
         endpoint = build_endpoint(inputs=inputs)
+        endpoint = endpoint + "/format"
 
         content = self.graph_session.make_request(
             method="get", endpoint=endpoint)
@@ -394,6 +396,7 @@ class Range:
         }
 
         endpoint = build_endpoint(inputs=inputs)
+        endpoint = endpoint + "/format"
 
         if isinstance(range_format_properties, RangeFormatProperties):
             range_format_properties = range_format_properties.to_dict()
@@ -467,6 +470,7 @@ class Range:
         }
 
         endpoint = build_endpoint(inputs=inputs)
+        endpoint = endpoint + "/merge"
 
         body = {"across": across}
 
@@ -533,6 +537,7 @@ class Range:
         }
 
         endpoint = build_endpoint(inputs=inputs)
+        endpoint = endpoint + "/unmerge"
 
         content = self.graph_session.make_request(
             method="post",
@@ -601,6 +606,7 @@ class Range:
         }
 
         endpoint = build_endpoint(inputs=inputs)
+        endpoint = endpoint + "/clear"
 
         if isinstance(apply_to, Enum):
             apply_to = apply_to.value
@@ -673,6 +679,7 @@ class Range:
         }
 
         endpoint = build_endpoint(inputs=inputs)
+        endpoint = endpoint + "/delete"
 
         if isinstance(shift, Enum):
             shift = shift.value
