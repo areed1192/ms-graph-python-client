@@ -69,7 +69,7 @@ class WorkbookApplication:
         ----
         calculation_type :
             Specifies the calculation type to use. Possible
-            values are: Recalculate, Full, FullRebuild.
+            values are: `Recalculate`, `Full`, `FullRebuild`.
 
         item_id : str (optional, Default=None)
             The Drive Item Resource ID.
