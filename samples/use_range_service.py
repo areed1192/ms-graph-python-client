@@ -2,7 +2,9 @@ from pprint import pprint
 from configparser import ConfigParser
 from ms_graph.client import MicrosoftGraphClient
 
-# Define the Scopes needed to Login.
+# Needed Permissions
+# Files.ReadWrite
+
 scopes = [
     "Calendars.ReadWrite",
     "Files.ReadWrite.All",
@@ -12,15 +14,16 @@ scopes = [
     "User.Read.All",
     "Directory.Read.All",
     "Directory.ReadWrite.All",
-    "Group.Read.All",
-    "Group.ReadWrite.All",
+    "Mail.ReadWrite",
+    "Sites.ReadWrite.All",
+    "ExternalItem.Read.All",
 ]
 
 # Initialize the Parser.
 config = ConfigParser()
 
 # Read the file.
-config.read("configs/config.ini")
+config.read("config/config.ini")
 
 # Get the specified credentials.
 client_id = config.get("graph_api", "client_id")
@@ -33,14 +36,20 @@ graph_client = MicrosoftGraphClient(
     client_secret=client_secret,
     redirect_uri=redirect_uri,
     scope=scopes,
-    credentials="configs/ms_graph_state.jsonc",
+    credentials="config/ms_graph_state.jsonc",
 )
 
 # Login to the Client.
 graph_client.login()
 
-# Grab the Groups Services.
-groups_services = graph_client.groups()
+# Grab the Range Service.
+range_service = graph_client.range()
 
-# List all Groups.
-pprint(groups_services.list_groups())
+# Grab a range.
+range_object = range_service.get_range(
+    item_path="Desktop/Personal Code/Repo - YouTube Channel Management/"
+    + "youtube-channel-management/YouTube Video Description Database.xlsm",
+    worksheet_name_or_id="Video_Database",
+    address="A1:P374",
+)
+pprint(range_object)
