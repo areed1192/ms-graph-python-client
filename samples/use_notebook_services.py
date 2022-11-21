@@ -4,41 +4,41 @@ from ms_graph.client import MicrosoftGraphClient
 
 # SCOPES NEEDED:
 # ---------------
-# 'Notes.Create
-# 'Notes.Read'
-# 'Notes.ReadWrite'
-# 'Notes.Read.All',
-# 'Notes.ReadWrite.All'
+# "Notes.Create
+# "Notes.Read"
+# "Notes.ReadWrite"
+# "Notes.Read.All",
+# "Notes.ReadWrite.All"
 
 # Define the Scopes needed to Login.
 scopes = [
-    'Calendars.ReadWrite',
-    'Files.ReadWrite.All',
-    'User.ReadWrite.All',
-    'Notes.ReadWrite.All',
-    'Directory.ReadWrite.All',
-    'User.Read.All',
-    'Directory.Read.All',
-    'Directory.ReadWrite.All',
-    'Group.Read.All',
-    'Group.ReadWrite.All',
-    'Notes.Create',
-    'Notes.Read',
-    'Notes.ReadWrite',
-    'Notes.Read.All',
-    'Notes.ReadWrite.All'
+    "Calendars.ReadWrite",
+    "Files.ReadWrite.All",
+    "User.ReadWrite.All",
+    "Notes.ReadWrite.All",
+    "Directory.ReadWrite.All",
+    "User.Read.All",
+    "Directory.Read.All",
+    "Directory.ReadWrite.All",
+    "Group.Read.All",
+    "Group.ReadWrite.All",
+    "Notes.Create",
+    "Notes.Read",
+    "Notes.ReadWrite",
+    "Notes.Read.All",
+    "Notes.ReadWrite.All",
 ]
 
 # Initialize the Parser.
 config = ConfigParser()
 
 # Read the file.
-config.read('config/config.ini')
+config.read("configs/config.ini")
 
 # Get the specified credentials.
-client_id = config.get('graph_api', 'client_id')
-client_secret = config.get('graph_api', 'client_secret')
-redirect_uri = config.get('graph_api', 'redirect_uri')
+client_id = config.get("graph_api", "client_id")
+client_secret = config.get("graph_api", "client_secret")
+redirect_uri = config.get("graph_api", "redirect_uri")
 
 # Initialize the Client.
 graph_client = MicrosoftGraphClient(
@@ -46,7 +46,7 @@ graph_client = MicrosoftGraphClient(
     client_secret=client_secret,
     redirect_uri=redirect_uri,
     scope=scopes,
-    credentials='config/ms_graph_state.jsonc'
+    credentials="configs/ms_graph_state.jsonc",
 )
 
 # Login to the Client.

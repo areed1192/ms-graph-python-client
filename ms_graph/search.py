@@ -1,4 +1,3 @@
-from typing import Dict
 from ms_graph.session import GraphSession
 
 
@@ -25,15 +24,15 @@ class Search():
         self.graph_session: GraphSession = session
 
         # Set the endpoint.
-        self.endpoint = 'search'
+        self.endpoint = "search"
 
-    def query(self, search_request: Dict) -> Dict:
+    def query(self, search_request: dict) -> dict:
         """Runs the query specified in the request body. Search
         results are provided in the response.
 
         ### Returns
         ----
-        Dict:
+        dict :
             A `SearchResponse` collection.
         """
 
@@ -41,7 +40,7 @@ class Search():
         endpoint = self.endpoint + "/query"
 
         content = self.graph_session.make_request(
-            method='post',
+            method="post",
             endpoint=endpoint,
             json=search_request
         )
